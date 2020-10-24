@@ -6,7 +6,7 @@ export const dark: Theme = {
   colors: {
     background: '#222222',
 
-    primary: '#ff6699',
+    primary: '#006699',
     secondary: '#93abba',
 
     notSelected: '#555555',
