@@ -1,25 +1,23 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Routes from './routes';
+import GlobalStyle from './styles/global';
+import { themes } from './styles/themes/index';
+import { ThemeProvider } from 'styled-components';
+import { Theme } from './styles/themes/theme.model';
+import usePersistedState from './utils/usePersistedState';
 
 function App() {
+  const [theme, setTheme] = usePersistedState<Theme>('theme', themes.light);
+
+  const handleSetTheme = (selectedTheme: Theme) => {
+    setTheme(selectedTheme);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={{ ...theme, setTheme: handleSetTheme }}>
+      <GlobalStyle />
+      <Routes />
+    </ThemeProvider>
   );
 }
 
