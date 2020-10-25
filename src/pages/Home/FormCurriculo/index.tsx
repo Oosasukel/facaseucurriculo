@@ -73,7 +73,7 @@ const FormCurriculo: React.FC = () => {
 
   return (
     <FormContainer>
-      <FormProgress step={step} />
+      <FormProgress step={step} setStep={setStep} />
 
       {step === 1 ? (
         <FormContato

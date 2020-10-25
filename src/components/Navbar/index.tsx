@@ -12,8 +12,6 @@ import {
   LogoContainer,
   NavbarContent,
 } from './styles';
-import { dark } from '../../styles/themes/dark';
-import { light } from '../../styles/themes/light';
 
 // interface MenuButton {
 //   name: string;
@@ -39,9 +37,9 @@ const Navbar: React.FC = () => {
 
   const handleSwitchChange = (checked: boolean) => {
     if (checked) {
-      setTheme(dark);
+      setTheme('dark');
     } else {
-      setTheme(light);
+      setTheme('light');
     }
   };
 

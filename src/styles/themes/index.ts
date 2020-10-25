@@ -5,3 +5,5 @@ export const themes = {
   light: light,
   dark: dark,
 };
+
+export type ThemeNames = 'light' | 'dark';

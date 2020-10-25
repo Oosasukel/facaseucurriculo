@@ -57,10 +57,8 @@ const FormHabilidade: React.FC<Props> = ({
   };
 
   const updateCurriculoData = () => {
-    setTimeout(() => {
-      const data = formRef.current?.getData();
-      setCurriculoData({ ...curriculoData, ...data });
-    }, 200);
+    const data = formRef.current?.getData();
+    setCurriculoData({ ...curriculoData, ...data });
   };
 
   const handleRemove = (indexToRemove: number) => {

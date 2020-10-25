@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Routes from './routes';
 import GlobalStyle from './styles/global';
-import { themes } from './styles/themes/index';
+import { ThemeNames, themes } from './styles/themes/index';
 import { ThemeProvider } from 'styled-components';
 import { Theme } from './styles/themes/theme.model';
 import usePersistedState from './utils/usePersistedState';
 
 function App() {
-  const [theme, setTheme] = usePersistedState<Theme>('theme', themes.light);
+  const [themeName, setThemeName] = usePersistedState<ThemeNames>(
+    'themeName',
+    'light'
+  );
+  const [theme, setTheme] = useState<Theme>(themes[themeName]);
 
-  const handleSetTheme = (selectedTheme: Theme) => {
-    setTheme(selectedTheme);
+  const handleSetTheme = (selectedThemeName: ThemeNames) => {
+    const newTheme = themes[selectedThemeName];
+
+    setThemeName(selectedThemeName);
+    setTheme(newTheme);
   };
 
   return (
