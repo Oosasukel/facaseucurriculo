@@ -38,9 +38,7 @@ const FormCurriculo: React.FC = () => {
       }
     };
 
-    setTimeout(() => {
-      updatePdfBlob();
-    }, 200);
+    updatePdfBlob();
 
     return () => {
       isMounted = false;
@@ -50,13 +48,15 @@ const FormCurriculo: React.FC = () => {
   useEffect(() => {
     let isMounted = true;
 
-    pdfToCanvas(pdfUrl).then((canvas) => {
-      if (canvas) {
-        if (isMounted) {
-          setCurriculoCanvas(canvas);
+    setTimeout(() => {
+      pdfToCanvas(pdfUrl).then((canvas) => {
+        if (canvas) {
+          if (isMounted) {
+            setCurriculoCanvas(canvas);
+          }
         }
-      }
-    });
+      });
+    }, 200);
 
     return () => {
       isMounted = false;

@@ -19,7 +19,7 @@ export const ProgressBarValue = styled.div`
   background-color: var(--color-primary);
   height: 100%;
 
-  transition: width 0.2s;
+  transition: width 0.5s;
 `;
 
 export const ProgressBarIconsContainer = styled.div`
@@ -43,5 +43,9 @@ export const IconContainer = styled.div`
   background-color: ${({selected}: IconContainerProps) => selected ? 'var(--color-primary)' : 'var(--color-form-border)'};
   border-radius: 50%;
 
-  transition: background-color 0.2s;
+  transition: background-color 0.5s;
+
+  svg {
+    transition: color 0.2s;
+  }
 `;
