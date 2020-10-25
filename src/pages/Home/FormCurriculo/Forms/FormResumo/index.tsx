@@ -45,14 +45,16 @@ const FormResumo: React.FC<Props> = ({
   };
 
   const updateCurriculoData = () => {
-    const data = formRef.current?.getData();
-    setCurriculoData({ ...curriculoData, ...data });
+    setTimeout(() => {
+      const data = formRef.current?.getData();
+      setCurriculoData({ ...curriculoData, ...data });
+    }, 200);
   };
 
   return (
     <FormResumoContainer>
       <InputsContainer>
-        <FormTitle>Resumo</FormTitle>
+        <FormTitle>Descrição</FormTitle>
         <FormParagraph>Um breve resumo sobre você.</FormParagraph>
         <FormParagraph>
           O resumo mostra aos empregadores que você está preparado para o

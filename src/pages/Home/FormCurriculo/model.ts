@@ -52,6 +52,7 @@ export interface Emprego {
   estado: string;
   inicio: Date;
   fim: Date;
+  atualmente: boolean;
   descricao: string;
 }
 
@@ -62,6 +63,7 @@ export interface Curso {
   curso: string;
   inicio: Date;
   fim: Date;
+  atualmente: boolean;
 }
 
 export interface Habilidade {

@@ -165,8 +165,12 @@ const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
                         {`${
                           months[emprego.inicio.getMonth()]
                         }.${emprego.inicio.getFullYear()} - ${
-                          months[emprego.fim.getMonth()]
-                        }.${emprego.fim.getFullYear()}`}
+                          emprego.atualmente
+                            ? 'Atualmente'
+                            : `${
+                                months[emprego.fim.getMonth()]
+                              }.${emprego.fim.getFullYear()}`
+                        }`}
                       </Text>
                     </View>
                     <View style={styles.experienceItemCompanyContainer}>
@@ -213,8 +217,12 @@ const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
                         {`${
                           months[curso.inicio.getMonth()]
                         }.${curso.inicio.getFullYear()} - ${
-                          months[curso.fim.getMonth()]
-                        }.${curso.fim.getFullYear()}`}
+                          curso.atualmente
+                            ? 'Atualmente'
+                            : `${
+                                months[curso.fim.getMonth()]
+                              }.${curso.fim.getFullYear()}`
+                        }`}
                       </Text>
                     </View>
                     <View style={styles.experienceItemCompanyContainer}>

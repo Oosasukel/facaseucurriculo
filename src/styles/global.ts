@@ -39,6 +39,8 @@ export default createGlobalStyle`
     
     --color-button-remove: ${(props) => props.theme.colors.buttonRemove};
     --color-button-add: ${(props) => props.theme.colors.buttonAdd};
+  
+    --color-progress-icon: ${(props) => props.theme.colors.progressIcon};
   }
 
   * {

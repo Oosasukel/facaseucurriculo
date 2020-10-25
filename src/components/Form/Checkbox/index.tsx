@@ -9,7 +9,7 @@ interface Props {
 
 type InputProps = JSX.IntrinsicElements['input'] & Props;
 
-const Input: React.FC<InputProps> = ({ name, ...rest }) => {
+const Checkbox: React.FC<InputProps> = ({ name, ...rest }) => {
   const inputRef = useRef(null);
   const { fieldName, defaultValue, registerField, error } = useField(name);
 
@@ -17,7 +17,7 @@ const Input: React.FC<InputProps> = ({ name, ...rest }) => {
     registerField({
       name: fieldName,
       ref: inputRef.current,
-      path: 'value',
+      path: 'checked',
     });
   }, [fieldName, registerField]);
 
@@ -25,9 +25,9 @@ const Input: React.FC<InputProps> = ({ name, ...rest }) => {
     <InputContainer>
       <input
         ref={inputRef}
-        defaultValue={defaultValue}
-        autoComplete='n-off'
+        checked={defaultValue}
         {...rest}
+        type='checkbox'
         className='formInput'
       />
       <span style={{ color: '#f00' }}>{error}</span>
@@ -35,4 +35,4 @@ const Input: React.FC<InputProps> = ({ name, ...rest }) => {
   );
 };
 
-export default Input;
+export default Checkbox;

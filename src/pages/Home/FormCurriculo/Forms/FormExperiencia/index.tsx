@@ -21,6 +21,8 @@ import {
   ButtonAddContainer,
   ButtonAdd,
   ButtonRemoveContainer,
+  AtualContainer,
+  AtualLabel,
   ButtonRemove,
 } from '../../styles';
 import PreviewPDF from '../../PreviewPDF';
@@ -30,6 +32,7 @@ import MonthPicker from '../../../../../components/Form/MonthPicker';
 import InvisibleInput from '../../../../../components/Form/InvisibleInput';
 import FormButton from '../../../../../components/FormButton';
 import { FaAngleLeft, FaAngleRight, FaPlus, FaTrash } from 'react-icons/fa';
+import Checkbox from '../../../../../components/Form/Checkbox';
 
 interface Props {
   previousStep: () => void;
@@ -61,8 +64,10 @@ const FormExperiencia: React.FC<Props> = ({
   };
 
   const updateCurriculoData = () => {
-    const data = formRef.current?.getData();
-    setCurriculoData({ ...curriculoData, ...data });
+    setTimeout(() => {
+      const data = formRef.current?.getData();
+      setCurriculoData({ ...curriculoData, ...data });
+    }, 200);
   };
 
   const updateDate = (
@@ -106,6 +111,7 @@ const FormExperiencia: React.FC<Props> = ({
       descricao: '',
       empresa: '',
       fim: new Date(),
+      atualmente: false,
       inicio: new Date(),
     };
     id++;
@@ -175,7 +181,19 @@ const FormExperiencia: React.FC<Props> = ({
                         <MonthPicker
                           onChange={(date) => updateDate(date, index, 'fim')}
                           name={`empregos[${index}].fim`}
+                          disabled={emprego.atualmente}
                         />
+                        <AtualContainer>
+                          <Checkbox
+                            onChange={updateCurriculoData}
+                            name={`empregos[${index}].atualmente`}
+                            id={`${index}_atualmente`}
+                            placeholder='Cidade'
+                          />
+                          <AtualLabel htmlFor={`${index}_atualmente`}>
+                            Atualmente
+                          </AtualLabel>
+                        </AtualContainer>
                       </DateItemContainer>
                     </DatesContainer>
                     <Textarea

@@ -39,5 +39,7 @@ export const light: Theme = {
 
     buttonRemove: '#C0003C',
     buttonAdd: '#008D73',
+
+    progressIcon: '#fff',
   },
 };

@@ -21,6 +21,8 @@ import {
   FormTitle,
   InputLabel,
   InputsContainer,
+  AtualContainer,
+  AtualLabel,
   ButtonAdd,
 } from '../../styles';
 import PreviewPDF from '../../PreviewPDF';
@@ -29,6 +31,7 @@ import MonthPicker from '../../../../../components/Form/MonthPicker';
 import InvisibleInput from '../../../../../components/Form/InvisibleInput';
 import FormButton from '../../../../../components/FormButton';
 import { FaAngleLeft, FaAngleRight, FaPlus, FaTrash } from 'react-icons/fa';
+import Checkbox from '../../../../../components/Form/Checkbox';
 
 interface Props {
   previousStep: () => void;
@@ -60,8 +63,10 @@ const FormEducacao: React.FC<Props> = ({
   };
 
   const updateCurriculoData = () => {
-    const data = formRef.current?.getData();
-    setCurriculoData({ ...curriculoData, ...data });
+    setTimeout(() => {
+      const data = formRef.current?.getData();
+      setCurriculoData({ ...curriculoData, ...data });
+    }, 200);
   };
 
   const updateDate = (
@@ -104,6 +109,7 @@ const FormEducacao: React.FC<Props> = ({
       curso: '',
       inicio: new Date(),
       fim: new Date(),
+      atualmente: false,
     };
     id++;
 
@@ -160,7 +166,19 @@ const FormEducacao: React.FC<Props> = ({
                         <MonthPicker
                           onChange={(date) => updateDate(date, index, 'fim')}
                           name={`cursos[${index}].fim`}
+                          disabled={curso.atualmente}
                         />
+                        <AtualContainer>
+                          <Checkbox
+                            onChange={updateCurriculoData}
+                            name={`cursos[${index}].atualmente`}
+                            id={`${index}_atualmente`}
+                            placeholder='Cidade'
+                          />
+                          <AtualLabel htmlFor={`${index}_atualmente`}>
+                            Atualmente
+                          </AtualLabel>
+                        </AtualContainer>
                       </DateItemContainer>
                     </DatesContainer>
                   </EmpregoInfo>

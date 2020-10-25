@@ -36,5 +36,7 @@ export interface Theme {
 
     buttonRemove: string;
     buttonAdd: string;
+
+    progressIcon: string;
   };
 }

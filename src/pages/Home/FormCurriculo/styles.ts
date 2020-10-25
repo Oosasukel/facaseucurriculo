@@ -172,3 +172,13 @@ export const ButtonAdd = styled.button`
     box-shadow: 0 0 10px var(--color-button-add);
   }
 `;
+
+export const AtualContainer = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+export const AtualLabel = styled.label`
+  color: var(--color-form-label);
+  font-size: 0.8rem;
+`;
