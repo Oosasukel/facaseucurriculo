@@ -38,7 +38,9 @@ const FormCurriculo: React.FC = () => {
       }
     };
 
-    updatePdfBlob();
+    setTimeout(() => {
+      updatePdfBlob();
+    }, 200);
 
     return () => {
       isMounted = false;
