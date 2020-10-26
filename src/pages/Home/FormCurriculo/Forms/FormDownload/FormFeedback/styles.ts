@@ -8,6 +8,7 @@ export const FeedbackContainer = styled.div`
   border-radius: 20px;
   padding: 1rem;
   max-width: 300px;
+  border: 1px solid var(--color-form-border);
 
   background: var(--color-form-background);
 
