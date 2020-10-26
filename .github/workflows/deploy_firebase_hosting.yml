@@ -5,8 +5,8 @@ name: Firebase deploy
 on:
   push:
     branches:
-    - master
-    - release/*
+      - master
+      - release/*
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-node@master
         with:
-          node-version: '10.x'
+          node-version: '12.x'
       - run: npm install
       - run: npm run build
       - uses: w9jds/firebase-action@master
