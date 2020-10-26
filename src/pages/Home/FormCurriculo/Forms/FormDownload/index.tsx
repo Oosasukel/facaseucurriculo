@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaAngleLeft, FaDownload } from 'react-icons/fa';
 import FormButton from '../../../../../components/FormButton';
 import Spinner from '../../../../../components/Spinner';
 import { CurriculoData } from '../../model';
 import PreviewPDF from '../../PreviewPDF';
+import Modal from 'react-modal';
 import {
   ButtonsContainer,
   CurriculoContainer,
@@ -16,6 +17,23 @@ import {
   LinkDownload,
   PreviewPDFMobile,
 } from './styles';
+import FormFeedback from './FormFeedback';
+import { firestoreDB } from '../../../../../services/firestore';
+
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    padding: 0,
+    backgroundColor: 'initial',
+  },
+};
+
+Modal.setAppElement('#root');
 
 interface Props {
   previousStep: () => void;
@@ -30,8 +48,59 @@ const FormDownload: React.FC<Props> = ({
   pdfUrl,
   curriculoCanvas,
 }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const openFeedbackModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeFeedbackModal = () => {
+    setModalIsOpen(false);
+  };
+
+  const handleDownloadPdf = () => {
+    sendDataToStatistic('PDF');
+
+    setTimeout(() => {
+      openFeedbackModal();
+    }, 300);
+  };
+
+  const handleDownloadPng = () => {
+    sendDataToStatistic('PNG');
+
+    setTimeout(() => {
+      openFeedbackModal();
+    }, 300);
+  };
+
+  const sendDataToStatistic = (type: string) => {
+    firestoreDB
+      .collection('downloads')
+      .add({
+        curriculo: curriculoData,
+        type,
+        date: Date.now(),
+      })
+      .catch((error) => {
+        console.error('Erro ao enviar o feedback: ', error);
+      });
+  };
+
   return (
     <FormDownloadContainer>
+      <Modal
+        isOpen={modalIsOpen}
+        style={customStyles}
+        contentLabel='Feedback Modal'
+        onRequestClose={closeFeedbackModal}
+      >
+        <FormFeedback
+          closeModal={closeFeedbackModal}
+          curriculoData={curriculoData}
+        />
+      </Modal>
+
       <InputsContainer>
         <FormTitle>Currículo pronto! :D</FormTitle>
         <FormParagraph>
@@ -50,6 +119,7 @@ const FormDownload: React.FC<Props> = ({
           <LinkDownload
             download={`Curriculo_${curriculoData.nome}`}
             href={pdfUrl}
+            onClick={handleDownloadPdf}
           >
             Download PDF
             <FaDownload />
@@ -62,6 +132,7 @@ const FormDownload: React.FC<Props> = ({
           <LinkDownload
             download={`Curriculo_${curriculoData.nome}`}
             href={curriculoCanvas.toDataURL()}
+            onClick={handleDownloadPng}
           >
             Download PNG
             <FaDownload />

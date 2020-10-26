@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     borderColor: "#ddd",
   },
   photo: {
+    height: '100%',
     objectFit: "cover",
     borderRadius: 80,
     borderWidth: 1,

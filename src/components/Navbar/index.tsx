@@ -64,7 +64,6 @@ const Navbar: React.FC = () => {
             </NavbarButton>
           </Link>
         ))} */}
-
           <Link style={{ textDecoration: 'none' }} to='/'>
             <NavbarButton selected={'/' === location.pathname}>
               <label>Início</label>

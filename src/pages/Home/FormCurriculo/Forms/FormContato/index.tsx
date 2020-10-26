@@ -158,6 +158,7 @@ const FormContato: React.FC<Props> = ({
           <input
             onChange={handleFotoChange}
             id='foto'
+            accept='image/*'
             ref={inputFotoRef}
             type='file'
           />
