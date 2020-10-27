@@ -19,6 +19,8 @@ export const InputContainer = styled.div`
     resize: vertical;
 
     transition: border 0.2s;
+    transition: background 0.2s;
+    transition: color 0.2s;
 
     &:hover {
       border: 1px solid var(--color-form-input-border-hover);

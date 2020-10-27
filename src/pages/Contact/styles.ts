@@ -25,6 +25,8 @@ export const Title = styled.h1`
   transition: color 0.2s;
   margin: 0.5rem;
   margin-bottom: 1.5rem;
+
+  transition: color 0.2s;
 `;
 
 export const AuthorContainer = styled.div`
@@ -45,6 +47,8 @@ export const AuthorImage = styled.img`
   border-radius: 50%;
   border: 1px solid var(--color-form-border);
   margin-right: 2rem;
+
+  transition: border 0.2s;
 
   @media (max-width: 680px){
     margin: 0;
@@ -68,6 +72,8 @@ export const InfoLabel = styled.label`
   flex-direction: column;
   color: var(--color-p);
   font-size: 1rem;
+
+  transition: color 0.2s;
 `;
 
 export const InfoValue = styled.label`
@@ -76,6 +82,8 @@ export const InfoValue = styled.label`
   color: var(--color-h1);
   font-size: 1.2rem;
   font-weight: 600;
+
+  transition: color 0.2s;
 `;
 
 export const IconsContainer = styled.div`

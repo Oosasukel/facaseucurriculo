@@ -23,4 +23,6 @@ export const Title = styled.h1`
   transition: color 0.2s;
   margin: 0.5rem;
   margin-bottom: 1.5rem;
+
+  transition: color 0.2s;
 `;

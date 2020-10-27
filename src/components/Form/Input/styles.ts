@@ -16,6 +16,7 @@ export const InputContainer = styled.div`
     color: var(--color-form-input-color);
 
     transition: border 0.2s;
+    transition: color 0.2s;
 
     &:hover {
       border: 1px solid var(--color-form-input-border-hover);

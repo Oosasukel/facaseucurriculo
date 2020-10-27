@@ -6,18 +6,25 @@ export const FormContainer = styled.div`
   border-radius: 20px;
   border: 1px solid var(--color-form-border);
   background-color: var(--color-form-background);
+
+  transition: border 0.2s;
+  transition: background-color 0.2s;
 `;
 
 export const FormTitle = styled.h1`
   font-size: 1.5rem;
   color: var(--color-form-h1);
   margin-bottom: 1rem;
+
+  transition: color 0.2s;
 `;
 
 export const FormParagraph = styled.p`
   font-size: 1rem;
   color: var(--color-form-p);
   margin-bottom: 1rem;
+
+  transition: color 0.2s;
 `;
 
 export const InputsContainer = styled.div`
@@ -72,6 +79,8 @@ export const InputLabel = styled.label`
   color: var(--color-form-label);
   font-size: 1rem;
   justify-self: flex-start;
+
+  transition: color 0.2s;
 `;
 
 export const EmpregoContainer = styled.div`
@@ -87,6 +96,8 @@ export const EmpregoItem = styled.div`
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--color-form-border);
   margin-bottom: 1rem;
+
+  transition: border 0.2s;
 `;
 
 export const EmpregoInfo = styled.div`
@@ -181,4 +192,6 @@ export const AtualContainer = styled.div`
 export const AtualLabel = styled.label`
   color: var(--color-form-label);
   font-size: 0.8rem;
+
+  transition: color 0.2s;
 `;

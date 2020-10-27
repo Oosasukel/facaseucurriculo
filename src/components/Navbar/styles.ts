@@ -12,6 +12,7 @@ export const NavbarContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   transition: background 0.2s;
 
   .title {
@@ -112,7 +113,8 @@ export const NavbarButton = styled.div`
   color: ${(props: NavbarButtonProps) =>
     props.selected ? 'var(--color-selected)' : 'var(--color-not-selected)'};
   padding: 0 1rem;
-  transition: 0.2s;
+
+  transition: color 0.2s;
 
   label {
     cursor: pointer;

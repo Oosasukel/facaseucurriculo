@@ -13,6 +13,8 @@ export const ProgressBarTotal = styled.div`
   width: 100%;
   height: 5px;
   margin: 0 0.5rem;
+  
+  transition: background-color 0.2s;
 `;
 
 export const ProgressBarValue = styled.div`
@@ -20,6 +22,7 @@ export const ProgressBarValue = styled.div`
   height: 100%;
 
   transition: width 0.5s;
+  transition: background-color 0.2s;
 `;
 
 export const ProgressBarIconsContainer = styled.div`
@@ -43,7 +46,7 @@ export const IconContainer = styled.div`
   background-color: ${({selected}: IconContainerProps) => selected ? 'var(--color-primary)' : 'var(--color-form-border)'};
   border-radius: 50%;
 
-  transition: background-color 0.5s;
+  transition: background-color 0.2s;
 
   svg {
     transition: color 0.2s;
