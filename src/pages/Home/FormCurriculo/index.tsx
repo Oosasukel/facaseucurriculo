@@ -12,11 +12,15 @@ import FormDownload from './Forms/FormDownload';
 import { FormContainer } from './styles';
 import pdfToCanvas from '../../../utils/pdfToCanvas';
 import FormProgress from './FormProgress';
+import usePersistedState from '../../../utils/usePersistedState';
 
 const FormCurriculo: React.FC = () => {
+  const [lastCurriculoData, setLastCurriculoData] = usePersistedState<
+    CurriculoData
+  >('lastCurriculoData', curriculoDefaultData);
   const [step, setStep] = useState(1);
   const [curriculoData, setCurriculoData] = useState<CurriculoData>(
-    curriculoDefaultData
+    lastCurriculoData
   );
   const [pdfUrl, setPdfUrl] = useState<string>('');
   const [
@@ -63,13 +67,23 @@ const FormCurriculo: React.FC = () => {
     };
   }, [pdfUrl]);
 
+  useEffect(() => {
+    if (step === 6) {
+      setLastCurriculoData({
+        ...curriculoData,
+        foto: curriculoDefaultData.foto,
+      });
+    }
+  }, [step]);
+
   const previousStep = () => {
     setStep(step - 1);
   };
 
   const nextStep = () => {
-    if (step < 6) {
-      setStep(step + 1);
+    const newStep = step + 1;
+    if (newStep <= 6) {
+      setStep(newStep);
     }
   };
 
