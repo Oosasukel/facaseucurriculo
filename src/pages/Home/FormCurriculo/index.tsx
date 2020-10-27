@@ -74,7 +74,7 @@ const FormCurriculo: React.FC = () => {
         foto: curriculoDefaultData.foto,
       });
     }
-  }, [step]);
+  }, [step, setLastCurriculoData, curriculoData]);
 
   const previousStep = () => {
     setStep(step - 1);
