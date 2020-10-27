@@ -68,11 +68,17 @@ export interface Curso {
 
 export interface Habilidade {
   id: number;
+  category: string;
+  children: HabilidadeChild[];
+}
+
+export interface HabilidadeChild {
+  id: number;
   habilidade: string;
   nivel: number;
 }
 
-export const curriculoDefaultData = {
+export const curriculoDefaultData: CurriculoData = {
   nome: '',
   sobrenome: '',
   profissao: '',
@@ -86,6 +92,17 @@ export const curriculoDefaultData = {
   foto: userImage,
   empregos: [],
   cursos: [],
-  habilidades: [],
+  habilidades: [
+    {
+      id: -2,
+      category: 'Profissionais',
+      children: []
+    },
+    {
+      id: -1,
+      category: 'Idiomas',
+      children: []
+    }
+  ],
   resumo: '',
 };

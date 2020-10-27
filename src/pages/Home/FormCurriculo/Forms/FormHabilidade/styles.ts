@@ -15,3 +15,13 @@ export const NivelContainer = styled.div`
     margin-right: 1rem;
   }
 `;
+
+export const SkillCategoryContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const SkillCategoryTitle = styled.h2`
+  font-size: 1.3rem;
+  color: var(--color-form-h1)
+`;

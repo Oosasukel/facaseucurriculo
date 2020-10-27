@@ -3,8 +3,13 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
 import Input from '../../../../../components/Form/Input';
-import { CurriculoData, Habilidade } from '../../model';
-import { FormHabilidadeContainer, NivelContainer } from './styles';
+import { CurriculoData, Habilidade, HabilidadeChild } from '../../model';
+import {
+  FormHabilidadeContainer,
+  NivelContainer,
+  SkillCategoryContainer,
+  SkillCategoryTitle,
+} from './styles';
 import {
   ButtonAdd,
   ButtonAddContainer,
@@ -35,7 +40,7 @@ interface Props {
   curriculoCanvas: HTMLCanvasElement | null;
 }
 
-let id = 1;
+let childId = 1;
 
 const FormHabilidade: React.FC<Props> = ({
   previousStep,
@@ -57,37 +62,82 @@ const FormHabilidade: React.FC<Props> = ({
   };
 
   const updateCurriculoData = () => {
-    const data = formRef.current?.getData();
+    const data = formRef.current?.getData() as CurriculoData;
+    const habilidades = data.habilidades;
+
+    const habilidadesWithoutUndefined = removeUndefinedChildren(habilidades);
+
+    data.habilidades = habilidadesWithoutUndefined;
+
     setCurriculoData({ ...curriculoData, ...data });
   };
 
-  const handleRemove = (indexToRemove: number) => {
+  const handleRemoveChild = (categoryIndex: number, childIndex: number) => {
     const formData = formRef.current?.getData() as CurriculoData;
     const habilidades = formData.habilidades;
 
     if (habilidades) {
-      const habilidadesUpdated = habilidades.filter(
-        (emprego, habilidadeIndex) => indexToRemove !== habilidadeIndex
+      const categoryUpdated = habilidades[categoryIndex].children.filter(
+        (child, currentChildIndex) => currentChildIndex !== childIndex
       );
 
-      const dataUpdated = { ...curriculoData, habilidades: habilidadesUpdated };
+      const habilidadesUpdated = [...habilidades];
+      habilidadesUpdated[categoryIndex].children = [...categoryUpdated];
+
+      const habilidadesFiltered = habilidadesUpdated.filter((category) => {
+        const hasChildren = category.children !== undefined;
+        const isDefaultCategory = category.id < 0;
+
+        if (!hasChildren && !isDefaultCategory) {
+          return false;
+        }
+
+        return true;
+      });
+
+      const habilidadesWithoutUndefined = removeUndefinedChildren(
+        habilidadesFiltered
+      );
+
+      const dataUpdated = {
+        ...curriculoData,
+        habilidades: habilidadesWithoutUndefined,
+      };
 
       setCurriculoData(dataUpdated);
     }
   };
 
-  const handleAddHabilidade = () => {
-    const newHabilidade: Habilidade = {
-      id,
+  const handleAddHabilidade = (categoryId: number) => {
+    const newHabilidade: HabilidadeChild = {
+      id: childId,
       habilidade: '',
       nivel: 80,
     };
-    id++;
+    childId++;
 
     const habilidades = curriculoData.habilidades;
-    habilidades.push(newHabilidade);
+    const habilidadesUpdated = removeUndefinedChildren(habilidades);
 
-    setCurriculoData({ ...curriculoData, habilidades });
+    habilidadesUpdated[categoryId].children.push(newHabilidade);
+
+    setCurriculoData({
+      ...curriculoData,
+      habilidades: habilidadesUpdated,
+    });
+  };
+
+  const removeUndefinedChildren = (habilidades: Habilidade[]): Habilidade[] => {
+    const habilidadesWithoutUndefinedChildren = [...habilidades];
+    habilidadesWithoutUndefinedChildren.forEach((category) => {
+      const hasChildren = category.children !== undefined;
+
+      if (!hasChildren) {
+        category.children = [];
+      }
+    });
+
+    return habilidadesWithoutUndefinedChildren;
   };
 
   return (
@@ -103,50 +153,72 @@ const FormHabilidade: React.FC<Props> = ({
 
         <Form ref={formRef} initialData={curriculoData} onSubmit={handleSubmit}>
           <EmpregoContainer>
-            {curriculoData.habilidades.map((habilidade, index) => {
+            {curriculoData.habilidades.map((habilidade, categoryIndex) => {
               return (
-                <EmpregoItem key={habilidade.id}>
-                  <EmpregoInfo>
-                    <InvisibleInput name={`habilidades[${index}].id`} />
-                    <Input
-                      onBlur={updateCurriculoData}
-                      type='text'
-                      name={`habilidades[${index}].habilidade`}
-                      placeholder='Habilidade'
-                    />
-                    <NivelContainer>
-                      <InputLabel>Nível (0 - 100)</InputLabel>
-                      <Input
-                        onBlur={updateCurriculoData}
-                        type='number'
-                        min='0'
-                        max='100'
-                        name={`habilidades[${index}].nivel`}
-                        placeholder='Nível (0 - 100)'
-                      />
-                    </NivelContainer>
-                  </EmpregoInfo>
-                  <EmpregoEdit>
-                    <ButtonRemoveContainer>
-                      <ButtonRemove
-                        type='button'
-                        onClick={() => handleRemove(index)}
-                      >
-                        <FaTrash />
-                      </ButtonRemove>
-                    </ButtonRemoveContainer>
-                  </EmpregoEdit>
-                </EmpregoItem>
+                <SkillCategoryContainer key={habilidade.id}>
+                  <SkillCategoryTitle>{habilidade.category}</SkillCategoryTitle>
+
+                  <InvisibleInput name={`habilidades[${categoryIndex}].id`} />
+
+                  <InvisibleInput
+                    name={`habilidades[${categoryIndex}].category`}
+                  />
+
+                  {habilidade.children !== undefined &&
+                    habilidade.children.map((habilidadeChild, childIndex) => {
+                      return (
+                        <EmpregoItem key={habilidadeChild.id}>
+                          <EmpregoInfo>
+                            <InvisibleInput
+                              name={`habilidades[${categoryIndex}].children[${childIndex}].id`}
+                            />
+                            <Input
+                              onBlur={updateCurriculoData}
+                              type='text'
+                              name={`habilidades[${categoryIndex}].children[${childIndex}].habilidade`}
+                              placeholder='Habilidade'
+                            />
+                            <NivelContainer>
+                              <InputLabel>Nível (0 - 100)</InputLabel>
+                              <Input
+                                onBlur={updateCurriculoData}
+                                type='number'
+                                min='0'
+                                max='100'
+                                name={`habilidades[${categoryIndex}].children[${childIndex}].nivel`}
+                                placeholder='Nível (0 - 100)'
+                              />
+                            </NivelContainer>
+                          </EmpregoInfo>
+                          <EmpregoEdit>
+                            <ButtonRemoveContainer>
+                              <ButtonRemove
+                                type='button'
+                                onClick={() =>
+                                  handleRemoveChild(categoryIndex, childIndex)
+                                }
+                              >
+                                <FaTrash />
+                              </ButtonRemove>
+                            </ButtonRemoveContainer>
+                          </EmpregoEdit>
+                        </EmpregoItem>
+                      );
+                    })}
+
+                  <ButtonAddContainer>
+                    <ButtonAdd
+                      type='button'
+                      onClick={() => handleAddHabilidade(categoryIndex)}
+                    >
+                      <FaPlus />
+                    </ButtonAdd>
+                  </ButtonAddContainer>
+                </SkillCategoryContainer>
               );
             })}
           </EmpregoContainer>
         </Form>
-
-        <ButtonAddContainer>
-          <ButtonAdd onClick={handleAddHabilidade}>
-            <FaPlus />
-          </ButtonAdd>
-        </ButtonAddContainer>
 
         <ButtonsContainer>
           <FormButton onClick={previousStep}>

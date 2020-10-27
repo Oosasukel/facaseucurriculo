@@ -17,7 +17,7 @@ import usePersistedState from '../../../utils/usePersistedState';
 const FormCurriculo: React.FC = () => {
   const [lastCurriculoData, setLastCurriculoData] = usePersistedState<
     CurriculoData
-  >('lastCurriculoData', curriculoDefaultData);
+  >('lastCurriculoDataV2', curriculoDefaultData);
   const [step, setStep] = useState(1);
   const [curriculoData, setCurriculoData] = useState<CurriculoData>(
     lastCurriculoData
