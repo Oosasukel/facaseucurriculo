@@ -31,6 +31,7 @@ import PreviewPDF from '../../PreviewPDF';
 import Spinner from '../../../../../components/Spinner';
 import FormButton from '../../../../../components/FormButton';
 import { FaAngleLeft, FaAngleRight, FaPlus, FaTrash } from 'react-icons/fa';
+import Slider from '../../../../../components/Form/Slider';
 
 interface Props {
   previousStep: () => void;
@@ -179,14 +180,10 @@ const FormHabilidade: React.FC<Props> = ({
                               placeholder='Habilidade'
                             />
                             <NivelContainer>
-                              <InputLabel>Nível (0 - 100)</InputLabel>
-                              <Input
-                                onBlur={updateCurriculoData}
-                                type='number'
-                                min='0'
-                                max='100'
+                              <InputLabel>Nível</InputLabel>
+                              <Slider
+                                onPointerUp={updateCurriculoData}
                                 name={`habilidades[${categoryIndex}].children[${childIndex}].nivel`}
-                                placeholder='Nível (0 - 100)'
                               />
                             </NivelContainer>
                           </EmpregoInfo>

@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import firebase from 'firebase/app';
 
 require('firebase/firestore');
 firebase.initializeApp({

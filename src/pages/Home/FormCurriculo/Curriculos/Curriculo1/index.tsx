@@ -103,37 +103,38 @@ const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
               {curriculoData.habilidades.map((habilidade) => {
                 return (
                   <View key={habilidade.id}>
-                    {habilidade.children.length > 0 && (
-                      <View style={styles.skillsCategory}>
-                        <Text style={styles.skillsCategoryTitle}>
-                          {habilidade.category}
-                        </Text>
-                        <View style={styles.skillsCategoryItems}>
-                          {habilidade.children.map((habilidadeChild) => {
-                            return (
-                              <View
-                                key={habilidadeChild.id}
-                                style={styles.skillItem}
-                              >
-                                <Text style={styles.skillItemText}>
-                                  {habilidadeChild.habilidade}
-                                </Text>
-                                <View style={styles.skillItemProgress}>
-                                  <View
-                                    style={{
-                                      ...styles.skillItemProgressValue,
-                                      width: `${Number(
-                                        habilidadeChild.nivel
-                                      )}%`,
-                                    }}
-                                  ></View>
+                    {habilidade.children !== undefined &&
+                      habilidade.children.length > 0 && (
+                        <View style={styles.skillsCategory}>
+                          <Text style={styles.skillsCategoryTitle}>
+                            {habilidade.category}
+                          </Text>
+                          <View style={styles.skillsCategoryItems}>
+                            {habilidade.children.map((habilidadeChild) => {
+                              return (
+                                <View
+                                  key={habilidadeChild.id}
+                                  style={styles.skillItem}
+                                >
+                                  <Text style={styles.skillItemText}>
+                                    {habilidadeChild.habilidade}
+                                  </Text>
+                                  <View style={styles.skillItemProgress}>
+                                    <View
+                                      style={{
+                                        ...styles.skillItemProgressValue,
+                                        width: `${Number(
+                                          habilidadeChild.nivel
+                                        )}%`,
+                                      }}
+                                    ></View>
+                                  </View>
                                 </View>
-                              </View>
-                            );
-                          })}
+                              );
+                            })}
+                          </View>
                         </View>
-                      </View>
-                    )}
+                      )}
                   </View>
                 );
               })}
