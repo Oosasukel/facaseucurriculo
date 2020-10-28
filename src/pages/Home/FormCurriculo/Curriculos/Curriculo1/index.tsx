@@ -91,9 +91,10 @@ const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
             )}
           </View>
 
-          {(curriculoData.habilidades.length > 2 ||
+          {(curriculoData.habilidades.length > 3 ||
             curriculoData.habilidades[0].children.length > 0 ||
-            curriculoData.habilidades[1].children.length > 0) && (
+            curriculoData.habilidades[1].children.length > 0 ||
+            curriculoData.habilidades[2].children.length > 0) && (
             <View style={styles.skillsContainer}>
               <View style={styles.skillsTitle}>
                 <Text style={styles.skillsTitleText}>HABILIDADES</Text>
