@@ -23,5 +23,6 @@ export const SkillCategoryContainer = styled.div`
 
 export const SkillCategoryTitle = styled.h2`
   font-size: 1.3rem;
+  margin-bottom: 1rem;
   color: var(--color-form-h1)
 `;

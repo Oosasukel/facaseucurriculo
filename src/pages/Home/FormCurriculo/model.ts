@@ -94,8 +94,13 @@ export const curriculoDefaultData: CurriculoData = {
   cursos: [],
   habilidades: [
     {
-      id: -2,
+      id: -3,
       category: 'Profissionais',
+      children: []
+    },
+    {
+      id: -2,
+      category: 'Pessoais',
       children: []
     },
     {
