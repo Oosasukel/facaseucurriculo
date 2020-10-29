@@ -22,7 +22,6 @@ export const ProgressBarValue = styled.div`
   height: 100%;
 
   transition: width 0.5s;
-  transition: background-color 0.2s;
 `;
 
 export const ProgressBarIconsContainer = styled.div`

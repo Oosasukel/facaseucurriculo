@@ -53,6 +53,12 @@ const FormHabilidade: React.FC<Props> = ({
   const formRef = useRef<FormHandles>(null);
 
   const handleSubmit = (data: CurriculoData) => {
+    const habilidades = data.habilidades;
+
+    const habilidadesWithoutUndefined = removeUndefinedChildren(habilidades);
+
+    data.habilidades = habilidadesWithoutUndefined;
+
     setCurriculoData({ ...curriculoData, ...data });
 
     nextStep();
