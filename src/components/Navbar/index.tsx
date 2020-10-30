@@ -24,12 +24,6 @@ import { messages } from '../../languages';
 
 const Navbar: React.FC = () => {
   const { title, colors, setTheme } = useContext(ThemeContext);
-  const [language, setLanguage] = useContext(LanguageContext);
-  const [labels, setLabels] = useState(messages[language]);
-
-  useEffect(() => {
-    setLabels(messages[language]);
-  }, [language]);
 
   const location = useLocation();
 
@@ -39,10 +33,6 @@ const Navbar: React.FC = () => {
     } else {
       setTheme('light');
     }
-  };
-
-  const handleChangeLanguage = () => {
-    setLanguage(language === 'pt' ? 'en' : 'pt');
   };
 
   return (
