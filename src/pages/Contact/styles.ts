@@ -91,9 +91,11 @@ export const IconsContainer = styled.div`
   display: flex;
 `;
 
-export const LinkedinLink = styled.a`
+export const IconLink = styled.a`
   text-decoration: none;
   cursor: pointer;
+
+  margin-right: 0.5rem;
 
   color: var(--color-form-p);
 

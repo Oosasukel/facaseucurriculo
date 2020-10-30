@@ -38,6 +38,10 @@ export const ImageContainer = styled.div`
   margin: 1rem 0;
 `;
 
+interface ImagePreviewContainerProps {
+  hoverPlaceHolder: string;
+}
+
 export const ImagePreviewContainer = styled.div`
   position: relative;
   display: flex;
@@ -52,7 +56,7 @@ export const ImagePreviewContainer = styled.div`
 
     &::after {
       position: absolute;
-      content: "Alterar";
+      content: 'Change';
       font-size: 16px;
       color: #000;
       left: 25px;

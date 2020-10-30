@@ -10,13 +10,13 @@ import {
   AuthorInfoContainer,
   InfoLabel,
   InfoValue,
-  LinkedinLink,
+  IconLink,
   IconsContainer,
   ContentContainer,
 } from './styles';
 
 import authorImage from '../../assets/images/Author.jpg';
-import { FaLinkedin } from 'react-icons/fa';
+import { FaLinkedin, FaFacebookSquare } from 'react-icons/fa';
 import { LanguageContext } from '../../App';
 import { messages } from '../../languages';
 
@@ -44,12 +44,18 @@ const Contact: React.FC = () => {
                 <InfoValue>facaseucurriculo@hotmail.com</InfoValue>
               </AuthorInfo>
               <IconsContainer>
-                <LinkedinLink
+                <IconLink
                   href='https://www.linkedin.com/in/rodrigogon/'
                   target='_blank'
                 >
                   <FaLinkedin size={50} />
-                </LinkedinLink>
+                </IconLink>
+                <IconLink
+                  href='https://www.facebook.com/rodrigo.goncalvesdonascimento/'
+                  target='_blank'
+                >
+                  <FaFacebookSquare size={50} />
+                </IconLink>
               </IconsContainer>
             </AuthorInfoContainer>
           </AuthorContainer>

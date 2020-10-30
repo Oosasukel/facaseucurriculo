@@ -78,6 +78,9 @@ export interface Labels {
   FormNext: string;
   FormPrevious: string;
   FormFinish: string;
+
+  PortugueseLabel: string;
+  EnglishLabel: string;
 }
 
 export const messages: Messages = {
@@ -152,6 +155,9 @@ export const messages: Messages = {
     FormNext: 'Próximo',
     FormPrevious: 'Voltar',
     FormFinish: 'Concluir',
+
+    PortugueseLabel: 'Português',
+    EnglishLabel: 'Inglês',
   },
   en: {
     HomeTitle: 'Do your curriculum',
@@ -167,28 +173,28 @@ export const messages: Messages = {
     CurriculoCurrent: 'Current',
 
     FormContatoTitle: 'Contact Information',
-    FormContatoMessage1: 'What is the best way to recrutadores entrarem em contact with you?',
-    FormContatoMessage2: 'Not is necessary preencher todos os campos, mas sugerimos você preencher seu email e telefone.',
+    FormContatoMessage1: 'What\'s the best way for employers to contact you?',
+    FormContatoMessage2: 'It is not necessary to complete all fields, but we suggest including an email and phone number.',
     FormContatoFirstName: 'Name',
-    FormContatoLastName: 'Lastname',
-    FormContatoJobTitle: 'Job',
+    FormContatoLastName: 'Last Name',
+    FormContatoJobTitle: 'Profession',
     FormContatoCity: 'City',
     FormContatoDistrict: 'District',
     FormContatoPhone: 'Phone',
     FormContatoEmail: 'Email',
     FormContatoChangeImage: 'Change photo',
-    FormContatoUF: 'UF',
+    FormContatoUF: 'State',
     FormContatoStreet: 'Street',
 
     FormDownloadTitle: 'Curriculum completed!',
-    FormDownloadMessage: 'Choose what formato deseja do the download.',
+    FormDownloadMessage: 'Choose the format you want to download.',
 
     FormFeedbackThank: 'Thank you',
     FormFeedback: 'What did you think of the tool?',
     FormFeedbackMessage: 'Message...',
 
     FormEducacaoTitle: 'Education',
-    FormEducacaoMessage: 'Include all courses, even if you still doing.',
+    FormEducacaoMessage: 'Include every school, even if you\'re still there or didn\'t graduate.',
     FormEducacaoCurso: 'Course',
     FormEducacaoEscola: 'School',
     FormEducacaoCidade: 'City',
@@ -196,26 +202,26 @@ export const messages: Messages = {
     FormEducacaoStart: 'Start',
     FormEducacaoEnd: 'End',
 
-    FormExperienciaTitle: 'Previous Exp',
-    FormExperienciaMessage1: 'Recruters see your curriculum about six seconds to decide something.',
-    FormExperienciaMessage2: 'We sugest you put the main frames.',
-    FormExperienciaEmpresa: 'Empresa em inglês',
-    FormExperienciaCargo: 'Cargo em inglês',
+    FormExperienciaTitle: 'Work History',
+    FormExperienciaMessage1: 'Employers scan your resume for six seconds to decide if you are a match.',
+    FormExperienciaMessage2: 'We suggest that you put the main ones, to make a good impression.',
+    FormExperienciaEmpresa: 'Company',
+    FormExperienciaCargo: 'Job Title',
     FormExperienciaCidade: 'City',
-    FormExperienciaEstado: 'UF',
+    FormExperienciaEstado: 'State',
     FormExperienciaAtualmente: 'Current',
     FormExperienciaDescricao: 'Description',
 
-    FormHabilidadeTitle: 'Habilidades',
-    FormHabilidadeMessage1: 'Recrutadores analisam as habilidades por palavras-chave.',
-    FormHabilidadeMessage2: 'Exemplos: MS-Office, Soluções de problemas, Organização.',
-    FormHabilidadeHabilidade: 'Habilidade',
-    FormHabilidadeNivel: 'Nível',
+    FormHabilidadeTitle: 'Skills',
+    FormHabilidadeMessage1: 'Employers scan skills for relevant keywords.',
+    FormHabilidadeMessage2: 'Examples: MS-Office, Troubleshooting, Organization.',
+    FormHabilidadeHabilidade: 'Skill',
+    FormHabilidadeNivel: 'Level',
 
-    FormResumoTitle: 'Description',
-    FormResumoMessage1: 'A breve resume about you.',
-    FormResumoMessage2: 'O resumo mostra aos empregadores que você está preparado para o trabalho.',
-    FormResumoResumo: 'Uma breve descrição...',
+    FormResumoTitle: 'Summary',
+    FormResumoMessage1: 'A brief summary of you.',
+    FormResumoMessage2: 'Your summary shows employers you\'re right for their job.',
+    FormResumoResumo: 'A brief summary...',
 
     Loading: 'Loading',
 
@@ -224,5 +230,8 @@ export const messages: Messages = {
     FormNext: 'Next',
     FormPrevious: 'Previous',
     FormFinish: 'Finish',
+
+    PortugueseLabel: 'Portuguese',
+    EnglishLabel: 'English',
   }
 }

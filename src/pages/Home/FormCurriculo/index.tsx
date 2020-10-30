@@ -23,7 +23,7 @@ const FormCurriculo: React.FC = () => {
   >('lastCurriculoDataV2', curriculoDefaultData);
   const [step, setStep] = useState(1);
   const [curriculoData, setCurriculoData] = useState<CurriculoData>(
-    curriculoDefaultData
+    lastCurriculoData
   );
   const [pdfUrl, setPdfUrl] = useState<string>('');
   const [
@@ -50,7 +50,23 @@ const FormCurriculo: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    if (language === 'pt') {
+      const newCurriculoData = { ...curriculoData };
+      newCurriculoData.habilidades[0].category = 'Profissionais';
+      newCurriculoData.habilidades[1].category = 'Pessoais';
+      newCurriculoData.habilidades[2].category = 'Idiomas';
+
+      setCurriculoData(newCurriculoData);
+    } else {
+      const newCurriculoData = { ...curriculoData };
+      newCurriculoData.habilidades[0].category = 'professional';
+      newCurriculoData.habilidades[1].category = 'Personal';
+      newCurriculoData.habilidades[2].category = 'Languages';
+
+      setCurriculoData(newCurriculoData);
+    }
     setLabels(messages[language]);
+    // eslint-disable-next-line
   }, [language]);
 
   useEffect(() => {

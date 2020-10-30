@@ -93,7 +93,7 @@ export const SpaceButtons = styled.div`
     display: none;
   }
 
-  @media (max-width: 380px){
+  @media (max-width: 550px){
     svg {
       display: inline;
     }
@@ -113,6 +113,7 @@ export const NavbarButton = styled.div`
   color: ${(props: NavbarButtonProps) =>
     props.selected ? 'var(--color-selected)' : 'var(--color-not-selected)'};
   padding: 0 1rem;
+  display: flex;
 
   transition: color 0.2s;
 
@@ -122,5 +123,81 @@ export const NavbarButton = styled.div`
 
   &:hover {
     color: var(--color-primary-hover);
+  }
+`;
+
+export const LanguagesContainer = styled.div`
+  position: relative;
+`;
+
+export const CurrentLanguageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+
+  cursor: pointer;
+
+  &:hover {
+    label {
+      color: var(--color-primary-hover);
+    }
+  }
+`;
+
+export const LanguageIcon = styled.img`
+  margin-right: 0.2rem;
+`;
+
+export const CurrentLanguageLabel = styled.label`
+  font-size: 1rem;
+  font-weight: 700;
+  margin-right: 0.2rem;
+  color: var(--color-not-selected);
+
+  transition: color 0.2s;
+
+  cursor: pointer;
+`;
+
+export const LanguageLabel = styled.span`
+  font-size: 1rem;
+  font-weight: 700;
+  margin-right: 0.2rem;
+  color: var(--color-not-selected);
+
+  transition: color 0.2s;
+
+  cursor: pointer;
+`;
+
+export const LanguagesListContainer = styled.ul`
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 10px;
+  left: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  background: var(--color-form-background);
+
+  &.open {
+    display: flex;
+  }
+`;
+
+export const LanguageItemContainer = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  &:hover {
+    span {
+      color: var(--color-primary-hover);
+    }
   }
 `;

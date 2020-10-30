@@ -11,6 +11,13 @@ import {
   NavbarButton,
   LogoContainer,
   NavbarContent,
+  CurrentLanguageContainer,
+  LanguageIcon,
+  LanguageLabel,
+  LanguagesContainer,
+  LanguagesListContainer,
+  LanguageItemContainer,
+  CurrentLanguageLabel,
 } from './styles';
 
 import { LanguageContext } from '../../App';
@@ -22,10 +29,29 @@ import { messages } from '../../languages';
 //   key: number;
 // }
 
+interface LanguagesInfo {
+  [language: string]: {
+    image: string;
+    label: 'PortugueseLabel' | 'EnglishLabel';
+  };
+}
+
+const languagesInfo: LanguagesInfo = {
+  pt: {
+    image: 'https://www.countryflags.io/br/shiny/24.png',
+    label: 'PortugueseLabel',
+  },
+  en: {
+    image: 'https://www.countryflags.io/us/shiny/24.png',
+    label: 'EnglishLabel',
+  },
+};
+
 const Navbar: React.FC = () => {
   const { title, colors, setTheme } = useContext(ThemeContext);
-  const [language] = useContext(LanguageContext);
+  const [language, setLanguage] = useContext(LanguageContext);
   const [labels, setLabels] = useState(messages[language]);
+  const [openLanguages, setOpenLanguages] = useState(false);
 
   useEffect(() => {
     setLabels(messages[language]);
@@ -41,6 +67,11 @@ const Navbar: React.FC = () => {
     }
   };
 
+  const handleSetLanguage = (newLanguage: string) => {
+    setLanguage(newLanguage);
+    setOpenLanguages(false);
+  };
+
   return (
     <NavbarContainer>
       <NavbarContent>
@@ -51,17 +82,33 @@ const Navbar: React.FC = () => {
         </Link>
 
         <SpaceButtons>
-          {/* {menuButtons.map((menuButton) => (
-          <Link
-            key={menuButton.key}
-            style={{ textDecoration: 'none' }}
-            to={menuButton.linkTo}
+          <LanguagesContainer
+            onMouseEnter={() => setOpenLanguages(true)}
+            onMouseLeave={() => setOpenLanguages(false)}
           >
-            <NavbarButton selected={menuButton.linkTo === location.pathname}>
-              {menuButton.name}
-            </NavbarButton>
-          </Link>
-        ))} */}
+            <CurrentLanguageContainer onClick={() => setOpenLanguages(true)}>
+              <LanguageIcon src={languagesInfo[language].image} />
+              <CurrentLanguageLabel>
+                {labels[languagesInfo[language].label]}
+              </CurrentLanguageLabel>
+            </CurrentLanguageContainer>
+
+            <LanguagesListContainer className={openLanguages ? 'open' : ''}>
+              {language !== 'pt' && (
+                <LanguageItemContainer onClick={() => handleSetLanguage('pt')}>
+                  <LanguageIcon src={languagesInfo['pt'].image} />
+                  <LanguageLabel>{labels.PortugueseLabel}</LanguageLabel>
+                </LanguageItemContainer>
+              )}
+              {language !== 'en' && (
+                <LanguageItemContainer onClick={() => handleSetLanguage('en')}>
+                  <LanguageIcon src={languagesInfo['en'].image} />
+                  <LanguageLabel>{labels.EnglishLabel}</LanguageLabel>
+                </LanguageItemContainer>
+              )}
+            </LanguagesListContainer>
+          </LanguagesContainer>
+
           <Link style={{ textDecoration: 'none' }} to='/'>
             <NavbarButton selected={'/' === location.pathname}>
               <label>{labels.NavbarHome}</label>

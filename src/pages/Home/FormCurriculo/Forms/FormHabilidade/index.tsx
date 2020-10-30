@@ -60,6 +60,10 @@ const FormHabilidade: React.FC<Props> = ({
     setLabels(messages[language]);
   }, [language]);
 
+  useEffect(() => {
+    formRef.current?.setData(curriculoData);
+  }, [curriculoData]);
+
   const handleSubmit = (data: CurriculoData) => {
     const habilidades = data.habilidades;
 
