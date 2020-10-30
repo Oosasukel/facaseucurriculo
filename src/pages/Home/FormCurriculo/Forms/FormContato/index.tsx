@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
@@ -24,6 +24,8 @@ import {
 } from '../../styles';
 import { FaAngleRight } from 'react-icons/fa';
 import FormButton from '../../../../../components/FormButton';
+import { LanguageContext } from '../../../../../App';
+import { messages } from '../../../../../languages';
 
 interface Props {
   nextStep: () => void;
@@ -40,6 +42,12 @@ const FormContato: React.FC<Props> = ({
 }) => {
   const formRef = useRef<FormHandles>(null);
   const inputFotoRef = useRef<HTMLInputElement>(null);
+  const [language] = useContext(LanguageContext);
+  const [labels, setLabels] = useState(messages[language]);
+
+  useEffect(() => {
+    setLabels(messages[language]);
+  }, [language]);
 
   const handleSubmit = (data: CurriculoData) => {
     setCurriculoData({ ...curriculoData, ...data });
@@ -96,48 +104,55 @@ const FormContato: React.FC<Props> = ({
   return (
     <FormContatoContainer>
       <InputsContainer>
-        <FormTitle>Informações de contato</FormTitle>
-        <FormParagraph>
-          Qual a melhor maneira dos recrutadores entrarem em contato com você?
-        </FormParagraph>
-        <FormParagraph>
-          Não é necessário preencher todos os campos, mas sugerimos você
-          preencher seu email e telefone.
-        </FormParagraph>
+        <FormTitle>{labels.FormContatoTitle}</FormTitle>
+        <FormParagraph>{labels.FormContatoMessage1}</FormParagraph>
+        <FormParagraph>{labels.FormContatoMessage2}</FormParagraph>
         <Form ref={formRef} initialData={curriculoData} onSubmit={handleSubmit}>
-          <Input onBlur={updateCurriculoData} name='nome' placeholder='Nome' />
+          <Input
+            onBlur={updateCurriculoData}
+            name='nome'
+            placeholder={labels.FormContatoFirstName}
+          />
           <Input
             onBlur={updateCurriculoData}
             name='sobrenome'
-            placeholder='Sobrenome'
+            placeholder={labels.FormContatoLastName}
           />
           <Input
             onBlur={updateCurriculoData}
             name='profissao'
-            placeholder='Profissao'
+            placeholder={labels.FormContatoJobTitle}
           />
           <Input
             onBlur={updateCurriculoData}
             name='cidade'
-            placeholder='Cidade'
+            placeholder={labels.FormContatoCity}
           />
-          <Input onBlur={updateCurriculoData} name='estado' placeholder='UF' />
-          <Input onBlur={updateCurriculoData} name='rua' placeholder='Rua' />
+          <Input
+            onBlur={updateCurriculoData}
+            name='estado'
+            placeholder={labels.FormContatoUF}
+          />
+          <Input
+            onBlur={updateCurriculoData}
+            name='rua'
+            placeholder={labels.FormContatoStreet}
+          />
           <Input
             onBlur={updateCurriculoData}
             name='bairro'
-            placeholder='Bairro'
+            placeholder={labels.FormContatoDistrict}
           />
           <Input
             onChange={formatInput}
             onBlur={updateCurriculoData}
             name='telefone'
-            placeholder='Telefone'
+            placeholder={labels.FormContatoPhone}
           />
           <Input
             onBlur={updateCurriculoData}
             name='email'
-            placeholder='Email'
+            placeholder={labels.FormContatoEmail}
           />
           <Input
             onBlur={updateCurriculoData}
@@ -154,7 +169,9 @@ const FormContato: React.FC<Props> = ({
             />
           </ImagePreviewContainer>
 
-          <PhotoLabel htmlFor='foto'>Alterar foto</PhotoLabel>
+          <PhotoLabel htmlFor='foto'>
+            {labels.FormContatoChangeImage}
+          </PhotoLabel>
           <input
             onChange={handleFotoChange}
             id='foto'
@@ -167,7 +184,7 @@ const FormContato: React.FC<Props> = ({
         <ButtonsContainer>
           <div></div>
           <FormButton onClick={handleNextClick}>
-            Próximo
+            {labels.FormNext}
             <FaAngleRight />
           </FormButton>
         </ButtonsContainer>

@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DonateLink, FooterContainer, FooterContent, Author } from './styles';
 import { FaPaypal, FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { LanguageContext } from '../../App';
+import { messages } from '../../languages';
 
 const Footer: React.FC = () => {
+  const [language] = useContext(LanguageContext);
+  const [labels, setLabels] = useState(messages[language]);
+
+  useEffect(() => {
+    setLabels(messages[language]);
+  }, [language]);
+
   return (
     <FooterContainer>
       <FooterContent>
         <Link to='contact'>
           <Author>
             <FaUserCircle size={20} style={{ marginRight: 4 }} />
-            Autor: Rodrigo Gonçalves do Nascimento
+            {labels.FooterAuthor}: Rodrigo Gonçalves do Nascimento
           </Author>
         </Link>
 
@@ -19,7 +28,7 @@ const Footer: React.FC = () => {
           target='_blank'
         >
           <FaPaypal size={20} style={{ marginRight: 4 }} />
-          Doar via PayPal
+          {labels.FooterDonate} via PayPal
           {/* {<img src='https://www.paypalobjects.com/pt_BR/BR/i/btn/btn_donateCC_LG.gif' />} */}
         </DonateLink>
       </FooterContent>

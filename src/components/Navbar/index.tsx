@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Switch from 'react-switch';
 import { ThemeContext } from 'styled-components';
 import { shade } from 'polished';
@@ -13,6 +13,9 @@ import {
   NavbarContent,
 } from './styles';
 
+import { LanguageContext } from '../../App';
+import { messages } from '../../languages';
+
 // interface MenuButton {
 //   name: string;
 //   linkTo: string;
@@ -21,18 +24,13 @@ import {
 
 const Navbar: React.FC = () => {
   const { title, colors, setTheme } = useContext(ThemeContext);
-  // const menuButtons: Array<MenuButton> = [
-  //   {
-  //     name: 'Início',
-  //     linkTo: '/',
-  //     key: 1
-  //   },
-  //   {
-  //     name: 'Contato',
-  //     linkTo: '/contact',
-  //     key: 2,
-  //   },
-  // ];
+  const [language, setLanguage] = useContext(LanguageContext);
+  const [labels, setLabels] = useState(messages[language]);
+
+  useEffect(() => {
+    setLabels(messages[language]);
+  }, [language]);
+
   const location = useLocation();
 
   const handleSwitchChange = (checked: boolean) => {
@@ -41,6 +39,10 @@ const Navbar: React.FC = () => {
     } else {
       setTheme('light');
     }
+  };
+
+  const handleChangeLanguage = () => {
+    setLanguage(language === 'pt' ? 'en' : 'pt');
   };
 
   return (
@@ -66,14 +68,14 @@ const Navbar: React.FC = () => {
         ))} */}
           <Link style={{ textDecoration: 'none' }} to='/'>
             <NavbarButton selected={'/' === location.pathname}>
-              <label>Início</label>
+              <label>{labels.NavbarHome}</label>
               <FaHome size={24} />
             </NavbarButton>
           </Link>
 
           <Link style={{ textDecoration: 'none' }} to='/contact'>
             <NavbarButton selected={'/contact' === location.pathname}>
-              <label>Contato</label>
+              <label>{labels.NavbarContact}</label>
               <FaAddressCard size={24} />
             </NavbarButton>
           </Link>

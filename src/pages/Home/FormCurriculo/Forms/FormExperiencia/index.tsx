@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
@@ -33,6 +33,8 @@ import InvisibleInput from '../../../../../components/Form/InvisibleInput';
 import FormButton from '../../../../../components/FormButton';
 import { FaAngleLeft, FaAngleRight, FaPlus, FaTrash } from 'react-icons/fa';
 import Checkbox from '../../../../../components/Form/Checkbox';
+import { LanguageContext } from '../../../../../App';
+import { messages } from '../../../../../languages';
 
 interface Props {
   previousStep: () => void;
@@ -52,6 +54,12 @@ const FormExperiencia: React.FC<Props> = ({
   curriculoCanvas,
 }) => {
   const formRef = useRef<FormHandles>(null);
+  const [language] = useContext(LanguageContext);
+  const [labels, setLabels] = useState(messages[language]);
+
+  useEffect(() => {
+    setLabels(messages[language]);
+  }, [language]);
 
   const handleSubmit = (data: CurriculoData) => {
     setCurriculoData({ ...curriculoData, ...data });
@@ -123,15 +131,9 @@ const FormExperiencia: React.FC<Props> = ({
   return (
     <FormExperienciaContainer>
       <InputsContainer>
-        <FormTitle>Experiências Anteriores</FormTitle>
-        <FormParagraph>
-          Os recrutadores analisam seu resumo por seis segundos para decidir se
-          você bate com a vaga.
-        </FormParagraph>
-        <FormParagraph>
-          Sugerimos você colocar os pontos principais para dar uma boa
-          impressão.
-        </FormParagraph>
+        <FormTitle>{labels.FormExperienciaTitle}</FormTitle>
+        <FormParagraph>{labels.FormExperienciaMessage1}</FormParagraph>
+        <FormParagraph>{labels.FormExperienciaMessage2}</FormParagraph>
 
         <Form ref={formRef} initialData={curriculoData} onSubmit={handleSubmit}>
           <EmpregoContainer>
@@ -144,26 +146,26 @@ const FormExperiencia: React.FC<Props> = ({
                       onBlur={updateCurriculoData}
                       type='text'
                       name={`empregos[${index}].empresa`}
-                      placeholder='Empresa'
+                      placeholder={labels.FormExperienciaEmpresa}
                     />
                     <Input
                       onBlur={updateCurriculoData}
                       type='text'
                       name={`empregos[${index}].cargo`}
-                      placeholder='Cargo'
+                      placeholder={labels.FormExperienciaCargo}
                     />
                     <CityContainer>
                       <Input
                         onBlur={updateCurriculoData}
                         type='text'
                         name={`empregos[${index}].cidade`}
-                        placeholder='Cidade'
+                        placeholder={labels.FormExperienciaCidade}
                       />
                       <Input
                         onBlur={updateCurriculoData}
                         type='text'
                         name={`empregos[${index}].estado`}
-                        placeholder='UF'
+                        placeholder={labels.FormExperienciaEstado}
                       />
                     </CityContainer>
                     <DatesContainer>
@@ -186,10 +188,9 @@ const FormExperiencia: React.FC<Props> = ({
                             onChange={updateCurriculoData}
                             name={`empregos[${index}].atualmente`}
                             id={`${index}_atualmente`}
-                            placeholder='Cidade'
                           />
                           <AtualLabel htmlFor={`${index}_atualmente`}>
-                            Atualmente
+                            {labels.FormExperienciaAtualmente}
                           </AtualLabel>
                         </AtualContainer>
                       </DateItemContainer>
@@ -197,7 +198,7 @@ const FormExperiencia: React.FC<Props> = ({
                     <Textarea
                       onBlur={updateCurriculoData}
                       name={`empregos[${index}].descricao`}
-                      placeholder='Descricao'
+                      placeholder={labels.FormExperienciaDescricao}
                     />
                   </EmpregoInfo>
                   <EmpregoEdit>
@@ -225,10 +226,10 @@ const FormExperiencia: React.FC<Props> = ({
         <ButtonsContainer>
           <FormButton onClick={previousStep}>
             <FaAngleLeft />
-            Voltar
+            {labels.FormPrevious}
           </FormButton>
           <FormButton onClick={handleNextClick}>
-            Próximo
+            {labels.FormNext}
             <FaAngleRight />
           </FormButton>
         </ButtonsContainer>

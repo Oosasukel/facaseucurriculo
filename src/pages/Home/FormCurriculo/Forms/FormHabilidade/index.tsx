@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
@@ -32,6 +32,8 @@ import Spinner from '../../../../../components/Spinner';
 import FormButton from '../../../../../components/FormButton';
 import { FaAngleLeft, FaAngleRight, FaPlus, FaTrash } from 'react-icons/fa';
 import Slider from '../../../../../components/Form/Slider';
+import { LanguageContext } from '../../../../../App';
+import { messages } from '../../../../../languages';
 
 interface Props {
   previousStep: () => void;
@@ -51,6 +53,12 @@ const FormHabilidade: React.FC<Props> = ({
   curriculoCanvas,
 }) => {
   const formRef = useRef<FormHandles>(null);
+  const [language] = useContext(LanguageContext);
+  const [labels, setLabels] = useState(messages[language]);
+
+  useEffect(() => {
+    setLabels(messages[language]);
+  }, [language]);
 
   const handleSubmit = (data: CurriculoData) => {
     const habilidades = data.habilidades;
@@ -150,13 +158,9 @@ const FormHabilidade: React.FC<Props> = ({
   return (
     <FormHabilidadeContainer>
       <InputsContainer>
-        <FormTitle>Habilidades</FormTitle>
-        <FormParagraph>
-          Recrutadores analisam as habilidades por palavras-chave.
-        </FormParagraph>
-        <FormParagraph>
-          Exemplos: MS-Office, Soluções de problemas, Organização.
-        </FormParagraph>
+        <FormTitle>{labels.FormHabilidadeTitle}</FormTitle>
+        <FormParagraph>{labels.FormHabilidadeMessage1}</FormParagraph>
+        <FormParagraph>{labels.FormHabilidadeMessage2}</FormParagraph>
 
         <Form ref={formRef} initialData={curriculoData} onSubmit={handleSubmit}>
           <EmpregoContainer>
@@ -183,10 +187,12 @@ const FormHabilidade: React.FC<Props> = ({
                               onBlur={updateCurriculoData}
                               type='text'
                               name={`habilidades[${categoryIndex}].children[${childIndex}].habilidade`}
-                              placeholder='Habilidade'
+                              placeholder={labels.FormHabilidadeHabilidade}
                             />
                             <NivelContainer>
-                              <InputLabel>Nível</InputLabel>
+                              <InputLabel>
+                                {labels.FormHabilidadeNivel}
+                              </InputLabel>
                               <Slider
                                 onPointerUp={updateCurriculoData}
                                 name={`habilidades[${categoryIndex}].children[${childIndex}].nivel`}
@@ -226,10 +232,10 @@ const FormHabilidade: React.FC<Props> = ({
         <ButtonsContainer>
           <FormButton onClick={previousStep}>
             <FaAngleLeft />
-            Voltar
+            {labels.FormPrevious}
           </FormButton>
           <FormButton onClick={handleNextClick}>
-            Próximo
+            {labels.FormNext}
             <FaAngleRight />
           </FormButton>
         </ButtonsContainer>

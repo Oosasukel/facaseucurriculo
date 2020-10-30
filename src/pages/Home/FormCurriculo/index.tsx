@@ -1,5 +1,5 @@
 import ReactPDF from '@react-pdf/renderer';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import FormContato from './Forms/FormContato';
 import FormEducacao from './Forms/FormEducacao';
@@ -13,27 +13,56 @@ import { FormContainer } from './styles';
 import pdfToCanvas from '../../../utils/pdfToCanvas';
 import FormProgress from './FormProgress';
 import usePersistedState from '../../../utils/usePersistedState';
+import { LanguageContext } from '../../../App';
+import { messages } from '../../../languages';
 
 const FormCurriculo: React.FC = () => {
+  const [language] = useContext(LanguageContext);
   const [lastCurriculoData, setLastCurriculoData] = usePersistedState<
     CurriculoData
   >('lastCurriculoDataV2', curriculoDefaultData);
   const [step, setStep] = useState(1);
   const [curriculoData, setCurriculoData] = useState<CurriculoData>(
-    lastCurriculoData
+    curriculoDefaultData
   );
   const [pdfUrl, setPdfUrl] = useState<string>('');
   const [
     curriculoCanvas,
     setCurriculoCanvas,
   ] = useState<HTMLCanvasElement | null>(null);
+  const [labels, setLabels] = useState(messages[language]);
+
+  useEffect(() => {
+    const curriculoDataConverted = { ...lastCurriculoData };
+
+    curriculoDataConverted.empregos.forEach((emprego) => {
+      emprego.inicio = new Date(emprego.inicio);
+      emprego.fim = new Date(emprego.fim);
+    });
+
+    curriculoDataConverted.cursos.forEach((curso) => {
+      curso.inicio = new Date(curso.inicio);
+      curso.fim = new Date(curso.fim);
+    });
+
+    setCurriculoData(curriculoDataConverted);
+    // eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    setLabels(messages[language]);
+  }, [language]);
 
   useEffect(() => {
     let isMounted = true;
 
     const updatePdfBlob = async () => {
       const blob = await ReactPDF.pdf(
-        <Curriculo1 curriculoData={curriculoData} />
+        <Curriculo1
+          labels={labels}
+          language={language}
+          curriculoData={curriculoData}
+        />
       ).toBlob();
       const url = URL.createObjectURL(blob);
 
@@ -47,7 +76,7 @@ const FormCurriculo: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, [curriculoData]);
+  }, [curriculoData, language, labels]);
 
   useEffect(() => {
     let isMounted = true;

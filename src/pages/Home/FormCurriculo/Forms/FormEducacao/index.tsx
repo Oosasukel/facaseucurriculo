@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
@@ -32,6 +32,8 @@ import InvisibleInput from '../../../../../components/Form/InvisibleInput';
 import FormButton from '../../../../../components/FormButton';
 import { FaAngleLeft, FaAngleRight, FaPlus, FaTrash } from 'react-icons/fa';
 import Checkbox from '../../../../../components/Form/Checkbox';
+import { LanguageContext } from '../../../../../App';
+import { messages } from '../../../../../languages';
 
 interface Props {
   previousStep: () => void;
@@ -51,6 +53,12 @@ const FormEducacao: React.FC<Props> = ({
   curriculoCanvas,
 }) => {
   const formRef = useRef<FormHandles>(null);
+  const [language] = useContext(LanguageContext);
+  const [labels, setLabels] = useState(messages[language]);
+
+  useEffect(() => {
+    setLabels(messages[language]);
+  }, [language]);
 
   const handleSubmit = (data: CurriculoData) => {
     setCurriculoData({ ...curriculoData, ...data });
@@ -120,10 +128,8 @@ const FormEducacao: React.FC<Props> = ({
   return (
     <FormEducacaoContainer>
       <InputsContainer>
-        <FormTitle>Educação</FormTitle>
-        <FormParagraph>
-          Inclua todos os cursos, mesmo que ainda esteja fazendo.
-        </FormParagraph>
+        <FormTitle>{labels.FormEducacaoTitle}</FormTitle>
+        <FormParagraph>{labels.FormEducacaoMessage}</FormParagraph>
 
         <Form ref={formRef} initialData={curriculoData} onSubmit={handleSubmit}>
           <EmpregoContainer>
@@ -136,31 +142,31 @@ const FormEducacao: React.FC<Props> = ({
                       onBlur={updateCurriculoData}
                       type='text'
                       name={`cursos[${index}].curso`}
-                      placeholder='Curso'
+                      placeholder={labels.FormEducacaoCurso}
                     />
                     <Input
                       onBlur={updateCurriculoData}
                       type='text'
                       name={`cursos[${index}].escola`}
-                      placeholder='Escola'
+                      placeholder={labels.FormEducacaoEscola}
                     />
                     <Input
                       onBlur={updateCurriculoData}
                       type='text'
                       name={`cursos[${index}].cidade`}
-                      placeholder='Cidade'
+                      placeholder={labels.FormEducacaoCidade}
                     />
 
                     <DatesContainer>
                       <DateItemContainer>
-                        <InputLabel>Início</InputLabel>
+                        <InputLabel>{labels.FormEducacaoStart}</InputLabel>
                         <MonthPicker
                           onChange={(date) => updateDate(date, index, 'inicio')}
                           name={`cursos[${index}].inicio`}
                         />
                       </DateItemContainer>
                       <DateItemContainer>
-                        <InputLabel>Fim</InputLabel>
+                        <InputLabel>{labels.FormEducacaoEnd}</InputLabel>
                         <MonthPicker
                           onChange={(date) => updateDate(date, index, 'fim')}
                           name={`cursos[${index}].fim`}
@@ -171,10 +177,9 @@ const FormEducacao: React.FC<Props> = ({
                             onChange={updateCurriculoData}
                             name={`cursos[${index}].atualmente`}
                             id={`${index}_atualmente`}
-                            placeholder='Cidade'
                           />
                           <AtualLabel htmlFor={`${index}_atualmente`}>
-                            Atualmente
+                            {labels.FormEducacaoAtualmente}
                           </AtualLabel>
                         </AtualContainer>
                       </DateItemContainer>
@@ -205,10 +210,10 @@ const FormEducacao: React.FC<Props> = ({
         <ButtonsContainer>
           <FormButton onClick={previousStep}>
             <FaAngleLeft />
-            Voltar
+            {labels.FormPrevious}
           </FormButton>
           <FormButton onClick={handleNextClick}>
-            Próximo
+            {labels.FormNext}
             <FaAngleRight />
           </FormButton>
         </ButtonsContainer>

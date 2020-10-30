@@ -7,7 +7,7 @@ export const FooterContainer = styled.div`
 export const FooterContent = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
   margin: 0.5rem 0;
   width: 100%;
 
@@ -31,6 +31,7 @@ export const Author = styled.label`
   display: flex;
   color: var(--color-form-p);
   transition: color 0.2s;
+  margin-right: 1rem;
 
   cursor: pointer;
 

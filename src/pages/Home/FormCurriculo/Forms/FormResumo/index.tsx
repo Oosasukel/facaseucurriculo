@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 
@@ -16,6 +16,8 @@ import FormButton from '../../../../../components/FormButton';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import PreviewPDF from '../../PreviewPDF';
 import Spinner from '../../../../../components/Spinner';
+import { LanguageContext } from '../../../../../App';
+import { messages } from '../../../../../languages';
 
 interface Props {
   previousStep: () => void;
@@ -33,6 +35,12 @@ const FormResumo: React.FC<Props> = ({
   curriculoCanvas,
 }) => {
   const formRef = useRef<FormHandles>(null);
+  const [language] = useContext(LanguageContext);
+  const [labels, setLabels] = useState(messages[language]);
+
+  useEffect(() => {
+    setLabels(messages[language]);
+  }, [language]);
 
   const handleSubmit = (data: CurriculoData) => {
     setCurriculoData({ ...curriculoData, ...data });
@@ -52,28 +60,25 @@ const FormResumo: React.FC<Props> = ({
   return (
     <FormResumoContainer>
       <InputsContainer>
-        <FormTitle>Descrição</FormTitle>
-        <FormParagraph>Um breve resumo sobre você.</FormParagraph>
-        <FormParagraph>
-          O resumo mostra aos empregadores que você está preparado para o
-          trabalho.
-        </FormParagraph>
+        <FormTitle>{labels.FormResumoTitle}</FormTitle>
+        <FormParagraph>{labels.FormResumoMessage1}</FormParagraph>
+        <FormParagraph>{labels.FormResumoMessage2}</FormParagraph>
 
         <Form ref={formRef} initialData={curriculoData} onSubmit={handleSubmit}>
           <Textarea
             onBlur={updateCurriculoData}
             name='resumo'
-            placeholder='Uma breve descrição...'
+            placeholder={labels.FormResumoResumo}
           />
         </Form>
 
         <ButtonsContainer>
           <FormButton onClick={previousStep}>
             <FaAngleLeft />
-            Voltar
+            {labels.FormPrevious}
           </FormButton>
           <FormButton onClick={handleNextClick}>
-            Concluir
+            {labels.FormFinish}
             <FaAngleRight />
           </FormButton>
         </ButtonsContainer>

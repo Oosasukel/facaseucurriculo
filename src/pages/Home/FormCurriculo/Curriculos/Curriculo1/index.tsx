@@ -11,6 +11,8 @@ import workIcon from '../../../../../assets/images/briefcase-solid.png';
 import graduationIcon from '../../../../../assets/images/graduation-cap-solid.png';
 import { CurriculoData } from '../../model';
 
+import { Labels } from '../../../../../languages';
+
 const months = [
   'Jan',
   'Fev',
@@ -28,9 +30,11 @@ const months = [
 
 interface Props {
   curriculoData: CurriculoData;
+  labels: Labels;
+  language: string;
 }
 
-const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
+const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
   return (
     <Document>
       <Page size='A4' style={styles.page}>
@@ -48,7 +52,10 @@ const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
                 <View style={styles.contactIconContainer}>
                   <Image src={phoneIcon} style={styles.contactIcon} />
                 </View>
-                <Text style={styles.contactText}>{curriculoData.telefone}</Text>
+                <Text style={styles.contactText}>
+                  {language !== 'pt' ? '+55 ' : ''}
+                  {curriculoData.telefone}
+                </Text>
               </View>
             )}
             {curriculoData.email !== '' && (
@@ -97,7 +104,9 @@ const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
             curriculoData.habilidades[2].children.length > 0) && (
             <View style={styles.skillsContainer}>
               <View style={styles.skillsTitle}>
-                <Text style={styles.skillsTitleText}>HABILIDADES</Text>
+                <Text style={styles.skillsTitleText}>
+                  {labels.CurriculoSkillsTitle.toUpperCase()}
+                </Text>
                 <View style={styles.skillsTitleDivider}></View>
               </View>
 
@@ -168,7 +177,9 @@ const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
                 <View style={styles.experiencesHeaderIconContainer}>
                   <Image src={workIcon} style={styles.experiencesHeaderIcon} />
                 </View>
-                <Text style={styles.experiencesHeaderTitle}>EXPERIÊNCIAS</Text>
+                <Text style={styles.experiencesHeaderTitle}>
+                  {labels.CurriculoExperiencesTitle.toUpperCase()}
+                </Text>
                 <View style={styles.experiencesHeaderDivider}></View>
               </View>
 
@@ -181,13 +192,13 @@ const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
                       </Text>
                       <Text style={styles.experienceItemTime}>
                         {`${
-                          months[emprego.inicio.getMonth()]
-                        }.${emprego.inicio.getFullYear()} - ${
+                          months[new Date(emprego.inicio).getMonth()]
+                        }.${new Date(emprego.inicio).getFullYear()} - ${
                           emprego.atualmente
-                            ? 'Atualmente'
+                            ? labels.CurriculoCurrent
                             : `${
-                                months[emprego.fim.getMonth()]
-                              }.${emprego.fim.getFullYear()}`
+                                months[new Date(emprego.fim).getMonth()]
+                              }.${new Date(emprego.fim).getFullYear()}`
                         }`}
                       </Text>
                     </View>
@@ -220,7 +231,9 @@ const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
                     style={styles.experiencesHeaderIcon}
                   />
                 </View>
-                <Text style={styles.experiencesHeaderTitle}>FORMAÇÃO</Text>
+                <Text style={styles.experiencesHeaderTitle}>
+                  {labels.CurriculoEducationTitle.toUpperCase()}
+                </Text>
                 <View style={styles.experiencesHeaderDivider}></View>
               </View>
 
@@ -233,13 +246,13 @@ const Curriculo1: React.FC<Props> = ({ curriculoData }) => {
                       </Text>
                       <Text style={styles.experienceItemTime}>
                         {`${
-                          months[curso.inicio.getMonth()]
-                        }.${curso.inicio.getFullYear()} - ${
+                          months[new Date(curso.inicio).getMonth()]
+                        }.${new Date(curso.inicio).getFullYear()} - ${
                           curso.atualmente
-                            ? 'Atualmente'
+                            ? labels.CurriculoCurrent
                             : `${
-                                months[curso.fim.getMonth()]
-                              }.${curso.fim.getFullYear()}`
+                                months[new Date(curso.fim).getMonth()]
+                              }.${new Date(curso.fim).getFullYear()}`
                         }`}
                       </Text>
                     </View>

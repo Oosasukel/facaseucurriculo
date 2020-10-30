@@ -13,8 +13,10 @@ export const PhotoLabel = styled.label`
   justify-content: center;
   font-size: 1rem;
   height: 32px;
-  width: 110px;
+  width: min-content;
+  white-space: nowrap;
   margin: 1rem 0;
+  padding: 0 0.5rem;
   background: var(--color-form-button-background);
   border: 1px solid var(--color-form-button-border);
   border-radius: 20px;

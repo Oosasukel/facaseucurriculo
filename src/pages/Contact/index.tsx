@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import {
@@ -17,14 +17,23 @@ import {
 
 import authorImage from '../../assets/images/Author.jpg';
 import { FaLinkedin } from 'react-icons/fa';
+import { LanguageContext } from '../../App';
+import { messages } from '../../languages';
 
 const Contact: React.FC = () => {
+  const [language] = useContext(LanguageContext);
+  const [labels, setLabels] = useState(messages[language]);
+
+  useEffect(() => {
+    setLabels(messages[language]);
+  }, [language]);
+
   return (
     <>
       <Navbar />
       <ContactContainer>
         <ContentContainer>
-          <Title>Contato</Title>
+          <Title>{labels.ContactTitle}</Title>
 
           <AuthorContainer>
             <AuthorImage src={authorImage} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FaAngleLeft, FaDownload } from 'react-icons/fa';
 import FormButton from '../../../../../components/FormButton';
 import Spinner from '../../../../../components/Spinner';
@@ -19,6 +19,8 @@ import {
 } from './styles';
 import FormFeedback from './FormFeedback';
 import { firestoreDB } from '../../../../../services/firestore';
+import { LanguageContext } from '../../../../../App';
+import { messages } from '../../../../../languages';
 
 const customStyles = {
   content: {
@@ -50,6 +52,12 @@ const FormDownload: React.FC<Props> = ({
   curriculoCanvas,
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [language] = useContext(LanguageContext);
+  const [labels, setLabels] = useState(messages[language]);
+
+  useEffect(() => {
+    setLabels(messages[language]);
+  }, [language]);
 
   const openFeedbackModal = () => {
     setModalIsOpen(true);
@@ -102,11 +110,9 @@ const FormDownload: React.FC<Props> = ({
         />
       </Modal>
 
-      <InputsContainer>
-        <FormTitle>Currículo pronto! :D</FormTitle>
-        <FormParagraph>
-          Escolha em qual formato deseja fazer o download.
-        </FormParagraph>
+      <InputsContainer className='inputsContainer'>
+        <FormTitle>{labels.FormDownloadTitle} :D</FormTitle>
+        <FormParagraph>{labels.FormDownloadMessage}</FormParagraph>
 
         <PreviewPDFMobile>
           {curriculoCanvas ? (
@@ -126,7 +132,7 @@ const FormDownload: React.FC<Props> = ({
             <FaDownload />
           </LinkDownload>
         ) : (
-          <FormParagraph>Carregando...</FormParagraph>
+          <FormParagraph>{labels.Loading}...</FormParagraph>
         )}
 
         {curriculoCanvas ? (
@@ -139,13 +145,13 @@ const FormDownload: React.FC<Props> = ({
             <FaDownload />
           </LinkDownload>
         ) : (
-          <FormParagraph>Carregando...</FormParagraph>
+          <FormParagraph>{labels.Loading}...</FormParagraph>
         )}
 
         <ButtonsContainer>
           <FormButton onClick={previousStep}>
             <FaAngleLeft />
-            Voltar
+            {labels.FormPrevious}
           </FormButton>
         </ButtonsContainer>
       </InputsContainer>

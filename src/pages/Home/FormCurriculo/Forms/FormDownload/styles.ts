@@ -4,6 +4,10 @@ export const FormDownloadContainer = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+
+  .inputsContainer {
+    align-items: center;
+  }
 `;
 
 export const LinkDownload = styled.a`

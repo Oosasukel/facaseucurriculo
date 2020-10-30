@@ -21,7 +21,7 @@
     "react-scripts": "3.4.3",
     "react-switch": "^5.0.1",
     "styled-components": "^5.2.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
