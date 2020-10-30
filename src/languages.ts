@@ -160,7 +160,7 @@ export const messages: Messages = {
     EnglishLabel: 'Inglês',
   },
   en: {
-    HomeTitle: 'Do your curriculum',
+    HomeTitle: 'Make your CV',
     ContactTitle: 'Contact',
     FooterAuthor: 'Author',
     FooterDonate: 'Donate',
@@ -174,7 +174,7 @@ export const messages: Messages = {
 
     FormContatoTitle: 'Contact Information',
     FormContatoMessage1: 'What\'s the best way for employers to contact you?',
-    FormContatoMessage2: 'It is not necessary to complete all fields, but we suggest including an email and phone number.',
+    FormContatoMessage2: 'It is not necessary to complete all fields, but we suggest you to include an email and phone number.',
     FormContatoFirstName: 'Name',
     FormContatoLastName: 'Last Name',
     FormContatoJobTitle: 'Profession',
@@ -190,11 +190,11 @@ export const messages: Messages = {
     FormDownloadMessage: 'Choose the format you want to download.',
 
     FormFeedbackThank: 'Thank you',
-    FormFeedback: 'What did you think of the tool?',
+    FormFeedback: 'Rate this tool',
     FormFeedbackMessage: 'Message...',
 
     FormEducacaoTitle: 'Education',
-    FormEducacaoMessage: 'Include every school, even if you\'re still there or didn\'t graduate.',
+    FormEducacaoMessage: 'Include every education, even if you\'re still there or didn\'t graduate.',
     FormEducacaoCurso: 'Course',
     FormEducacaoEscola: 'School',
     FormEducacaoCidade: 'City',
@@ -203,8 +203,8 @@ export const messages: Messages = {
     FormEducacaoEnd: 'End',
 
     FormExperienciaTitle: 'Work History',
-    FormExperienciaMessage1: 'Employers scan your resume for six seconds to decide if you are a match.',
-    FormExperienciaMessage2: 'We suggest that you put the main ones, to make a good impression.',
+    FormExperienciaMessage1: 'Employers scan your resume for six seconds to decide if you match.',
+    FormExperienciaMessage2: 'We suggest you to put the main ones, to make a good impression.',
     FormExperienciaEmpresa: 'Company',
     FormExperienciaCargo: 'Job Title',
     FormExperienciaCidade: 'City',
