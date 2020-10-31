@@ -113,13 +113,12 @@ const FormCurriculo: React.FC = () => {
   }, [pdfUrl]);
 
   useEffect(() => {
-    if (step === 6) {
-      setLastCurriculoData({
-        ...curriculoData,
-        foto: curriculoDefaultData.foto,
-      });
-    }
-  }, [step, setLastCurriculoData, curriculoData]);
+    setLastCurriculoData({
+      ...curriculoData,
+      foto: curriculoDefaultData.foto,
+    });
+    // eslint-disable-next-line
+  }, [step]);
 
   const previousStep = () => {
     setStep(step - 1);
