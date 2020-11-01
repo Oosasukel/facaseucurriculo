@@ -58,40 +58,46 @@ const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
                 </Text>
               </View>
             )}
-            {curriculoData.email !== '' && (
+            {curriculoData.email.trim() !== '' && (
               <View style={styles.contactItem}>
                 <View style={styles.contactIconContainer}>
                   <Image src={emailIcon} style={styles.contactIcon} />
                 </View>
-                <Text style={styles.contactText}>{curriculoData.email}</Text>
+                <Text style={styles.contactText}>
+                  {curriculoData.email.trim()}
+                </Text>
               </View>
             )}
-            {curriculoData.linkedin !== '' && (
+            {curriculoData.linkedin.trim() !== '' && (
               <View style={styles.contactItem}>
                 <View style={styles.contactIconContainer}>
                   <Image src={linkedinIcon} style={styles.contactIcon} />
                 </View>
-                <Text style={styles.contactText}>{curriculoData.linkedin}</Text>
+                <Text style={styles.contactText}>
+                  {curriculoData.linkedin.trim()}
+                </Text>
               </View>
             )}
-            {(curriculoData.cidade !== '' ||
-              curriculoData.bairro !== '' ||
-              curriculoData.estado !== '' ||
-              curriculoData.rua !== '') && (
+            {(curriculoData.cidade.trim() !== '' ||
+              curriculoData.bairro.trim() !== '' ||
+              curriculoData.estado.trim() !== '' ||
+              curriculoData.rua.trim() !== '') && (
               <View style={styles.contactItem}>
                 <View style={styles.contactIconContainer}>
                   <Image src={addressIcon} style={styles.contactIcon} />
                 </View>
                 <View style={styles.addressContainer}>
                   <Text style={styles.contactText}>
-                    {curriculoData.rua !== '' ? `${curriculoData.rua}, ` : ''}
-                    {curriculoData.bairro}
+                    {curriculoData.rua.trim() !== ''
+                      ? `${curriculoData.rua.trim()}, `
+                      : ''}
+                    {curriculoData.bairro.trim()}
                   </Text>
                   <Text style={styles.contactText}>
-                    {curriculoData.cidade !== ''
-                      ? `${curriculoData.cidade} - `
+                    {curriculoData.cidade.trim() !== ''
+                      ? `${curriculoData.cidade.trim()} - `
                       : ''}
-                    {curriculoData.estado}
+                    {curriculoData.estado.trim()}
                   </Text>
                 </View>
               </View>
@@ -117,7 +123,7 @@ const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
                       habilidade.children.length > 0 && (
                         <View style={styles.skillsCategory}>
                           <Text style={styles.skillsCategoryTitle}>
-                            {habilidade.category}
+                            {habilidade.category.trim()}
                           </Text>
                           <View style={styles.skillsCategoryItems}>
                             {habilidade.children.map((habilidadeChild) => {
@@ -127,7 +133,7 @@ const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
                                   style={styles.skillItem}
                                 >
                                   <Text style={styles.skillItemText}>
-                                    {habilidadeChild.habilidade}
+                                    {habilidadeChild.habilidade.trim()}
                                   </Text>
                                   <View style={styles.skillItemProgress}>
                                     <View
@@ -152,19 +158,20 @@ const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
           )}
         </View>
         <View style={styles.sectionWhite}>
-          {(curriculoData.nome !== '' || curriculoData.sobrenome !== '') && (
+          {(curriculoData.nome.trim() !== '' ||
+            curriculoData.sobrenome.trim() !== '') && (
             <View style={styles.nameContainer}>
               <Text style={styles.firstName}>
-                {curriculoData.nome.toUpperCase()}
+                {curriculoData.nome.trim().toUpperCase()}
               </Text>
               <Text style={styles.lastName}>
-                {curriculoData.sobrenome.toUpperCase()}
+                {curriculoData.sobrenome.trim().toUpperCase()}
               </Text>
             </View>
           )}
 
-          {curriculoData.profissao !== '' && (
-            <Text style={styles.jobText}>{curriculoData.profissao}</Text>
+          {curriculoData.profissao.trim() !== '' && (
+            <Text style={styles.jobText}>{curriculoData.profissao.trim()}</Text>
           )}
 
           {curriculoData.resumo !== '' && (
@@ -188,7 +195,7 @@ const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
                   <View key={emprego.id} style={styles.experienceItemContainer}>
                     <View style={styles.experienceItemRoleContainer}>
                       <Text style={styles.experienceItemRole}>
-                        {emprego.cargo}
+                        {emprego.cargo.trim()}
                       </Text>
                       <Text style={styles.experienceItemTime}>
                         {`${
@@ -206,10 +213,13 @@ const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
                       <Text style={styles.experienceItemCompanyTitle}>
                         {emprego.empresa}
                       </Text>
-                      {(emprego.cidade !== '' || emprego.estado !== '') && (
+                      {(emprego.cidade.trim() !== '' ||
+                        emprego.estado.trim() !== '') && (
                         <Text style={styles.experienceItemCompanySummary}>
-                          {emprego.cidade !== '' ? `${emprego.cidade} - ` : ''}
-                          {emprego.estado}
+                          {emprego.cidade.trim() !== ''
+                            ? `${emprego.cidade.trim()} - `
+                            : ''}
+                          {emprego.estado.trim()}
                         </Text>
                       )}
                       <Text style={styles.experienceItemCompanySummary}>
@@ -242,7 +252,7 @@ const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
                   <View key={curso.id} style={styles.experienceItemContainer}>
                     <View style={styles.courseItemRoleContainer}>
                       <Text style={styles.experienceItemRole}>
-                        {curso.curso}
+                        {curso.curso.trim()}
                       </Text>
                       <Text style={styles.experienceItemTime}>
                         {`${
@@ -258,10 +268,10 @@ const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
                     </View>
                     <View style={styles.experienceItemCompanyContainer}>
                       <Text style={styles.experienceItemCompanyTitle}>
-                        {curso.escola}
+                        {curso.escola.trim()}
                       </Text>
                       <Text style={styles.experienceItemCompanySummary}>
-                        {curso.cidade}
+                        {curso.cidade.trim()}
                       </Text>
                     </View>
                   </View>
