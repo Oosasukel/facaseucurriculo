@@ -2,10 +2,52 @@ import { StyleSheet } from '@react-pdf/renderer';
 
 const styles = StyleSheet.create({
   page: {
-    flexDirection: 'row',
+    paddingBottom: 29,
+    paddingTop: 29,
   },
+  pageContent: {
+    flexDirection: 'row',
+    flex: 1,
+  },
+  
+  pageHeader: {
+    height: 30,
+    width: '100%',
+    flexDirection: 'row',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+  },
+  pageHeaderBlack: {
+    width: 230,
+    backgroundColor: '#151515',
+  },
+  pageHeaderWhite: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+  
+  pageFooter: {
+    height: 30,
+    width: '100%',
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+  },
+  pageFooterBlack: {
+    width: 230,
+    backgroundColor: '#151515',
+  },
+  pageFooterWhite: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+
   sectionBlack: {
-    paddingTop: 30,
+    paddingTop: 1,
     paddingHorizontal: 20,
     width: 230,
 
@@ -115,9 +157,9 @@ const styles = StyleSheet.create({
 
   
   sectionWhite: {
+    paddingTop: 1,
     backgroundColor: "#fff",
     flex: 1,
-    paddingTop: 30,
     paddingHorizontal: 20,
   },
 
