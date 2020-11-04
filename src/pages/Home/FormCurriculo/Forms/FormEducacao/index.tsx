@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import { v4 } from 'uuid';
 
 import Input from '../../../../../components/Form/Input';
 import { CurriculoData, Curso } from '../../model';
@@ -42,8 +43,6 @@ interface Props {
   setCurriculoData: React.Dispatch<React.SetStateAction<CurriculoData>>;
   curriculoCanvas: HTMLCanvasElement | null;
 }
-
-let id = 1;
 
 const FormEducacao: React.FC<Props> = ({
   previousStep,
@@ -109,7 +108,7 @@ const FormEducacao: React.FC<Props> = ({
 
   const handleAddCurso = () => {
     const newCurso: Curso = {
-      id,
+      id: v4(),
       escola: '',
       cidade: '',
       curso: '',
@@ -117,7 +116,6 @@ const FormEducacao: React.FC<Props> = ({
       fim: new Date(),
       atualmente: false,
     };
-    id++;
 
     const cursos = curriculoData.cursos;
     cursos.push(newCurso);

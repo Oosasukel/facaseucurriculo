@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import { v4 } from 'uuid';
 
 import Input from '../../../../../components/Form/Input';
 import { CurriculoData, Habilidade, HabilidadeChild } from '../../model';
@@ -42,8 +43,6 @@ interface Props {
   setCurriculoData: React.Dispatch<React.SetStateAction<CurriculoData>>;
   curriculoCanvas: HTMLCanvasElement | null;
 }
-
-let childId = 1;
 
 const FormHabilidade: React.FC<Props> = ({
   previousStep,
@@ -105,7 +104,8 @@ const FormHabilidade: React.FC<Props> = ({
 
       const habilidadesFiltered = habilidadesUpdated.filter((category) => {
         const hasChildren = category.children !== undefined;
-        const isDefaultCategory = category.id < 0;
+        const isDefaultCategory =
+          category.id === '-1' || category.id === '-2' || category.id === '-3';
 
         if (!hasChildren && !isDefaultCategory) {
           return false;
@@ -129,11 +129,10 @@ const FormHabilidade: React.FC<Props> = ({
 
   const handleAddHabilidade = (categoryId: number) => {
     const newHabilidade: HabilidadeChild = {
-      id: childId,
+      id: v4(),
       habilidade: '',
       nivel: 80,
     };
-    childId++;
 
     const habilidades = curriculoData.habilidades;
     const habilidadesUpdated = removeUndefinedChildren(habilidades);

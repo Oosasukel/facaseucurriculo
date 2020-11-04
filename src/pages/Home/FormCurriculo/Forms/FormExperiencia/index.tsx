@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import { v4 } from 'uuid';
 
 import Input from '../../../../../components/Form/Input';
 import { CurriculoData, Emprego } from '../../model';
@@ -43,8 +44,6 @@ interface Props {
   setCurriculoData: React.Dispatch<React.SetStateAction<CurriculoData>>;
   curriculoCanvas: HTMLCanvasElement | null;
 }
-
-let id = 1;
 
 const FormExperiencia: React.FC<Props> = ({
   previousStep,
@@ -110,7 +109,7 @@ const FormExperiencia: React.FC<Props> = ({
 
   const handleAddEmprego = () => {
     const newEmprego: Emprego = {
-      id,
+      id: v4(),
       cargo: '',
       cidade: '',
       estado: '',
@@ -120,7 +119,6 @@ const FormExperiencia: React.FC<Props> = ({
       atualmente: false,
       inicio: new Date(),
     };
-    id++;
 
     const empregos = curriculoData.empregos;
     empregos.push(newEmprego);

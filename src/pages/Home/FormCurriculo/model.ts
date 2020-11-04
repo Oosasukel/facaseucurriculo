@@ -45,7 +45,7 @@ export interface CurriculoData {
 }
 
 export interface Emprego {
-  id: number;
+  id: string;
   empresa: string;
   cargo: string;
   cidade: string;
@@ -57,7 +57,7 @@ export interface Emprego {
 }
 
 export interface Curso {
-  id: number;
+  id: string;
   escola: string;
   cidade: string;
   curso: string;
@@ -67,13 +67,13 @@ export interface Curso {
 }
 
 export interface Habilidade {
-  id: number;
+  id: string;
   category: string;
   children: HabilidadeChild[];
 }
 
 export interface HabilidadeChild {
-  id: number;
+  id: string;
   habilidade: string;
   nivel: number;
 }
@@ -94,17 +94,17 @@ export const curriculoDefaultData: CurriculoData = {
   cursos: [],
   habilidades: [
     {
-      id: -3,
+      id: '-3',
       category: 'Profissionais',
       children: []
     },
     {
-      id: -2,
+      id: '-2',
       category: 'Pessoais',
       children: []
     },
     {
-      id: -1,
+      id: '-1',
       category: 'Idiomas',
       children: []
     }

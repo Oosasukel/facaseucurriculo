@@ -20,7 +20,7 @@ const FormCurriculo: React.FC = () => {
   const [language] = useContext(LanguageContext);
   const [lastCurriculoData, setLastCurriculoData] = usePersistedState<
     CurriculoData
-  >('lastCurriculoDataV2', curriculoDefaultData);
+  >('lastCurriculoDataV3', curriculoDefaultData);
   const [step, setStep] = useState(1);
   const [curriculoData, setCurriculoData] = useState<CurriculoData>(
     lastCurriculoData
