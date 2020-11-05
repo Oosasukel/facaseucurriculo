@@ -26,6 +26,7 @@ const FormCurriculo: React.FC = () => {
     lastCurriculoData
   );
   const [pdfUrl, setPdfUrl] = useState<string>('');
+  const [curriculoLoading, setCurriculoLoading] = useState<boolean>(false);
   const [
     curriculoCanvas,
     setCurriculoCanvas,
@@ -73,6 +74,8 @@ const FormCurriculo: React.FC = () => {
     let isMounted = true;
 
     const updatePdfBlob = async () => {
+      setCurriculoLoading(true);
+
       const blob = await ReactPDF.pdf(
         <Curriculo1
           labels={labels}
@@ -84,6 +87,7 @@ const FormCurriculo: React.FC = () => {
 
       if (isMounted) {
         setPdfUrl(url);
+        setCurriculoLoading(false);
       }
     };
 
@@ -183,6 +187,7 @@ const FormCurriculo: React.FC = () => {
         <FormDownload
           previousStep={previousStep}
           curriculoData={curriculoData}
+          curriculoLoading={curriculoLoading}
           pdfUrl={pdfUrl}
           curriculoCanvas={curriculoCanvas}
         />

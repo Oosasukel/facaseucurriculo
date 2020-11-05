@@ -43,6 +43,7 @@ interface Props {
   curriculoData: CurriculoData;
   pdfUrl: string;
   curriculoCanvas: HTMLCanvasElement | null;
+  curriculoLoading: boolean;
 }
 
 const FormDownload: React.FC<Props> = ({
@@ -50,6 +51,7 @@ const FormDownload: React.FC<Props> = ({
   curriculoData,
   pdfUrl,
   curriculoCanvas,
+  curriculoLoading,
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [language] = useContext(LanguageContext);
@@ -122,7 +124,7 @@ const FormDownload: React.FC<Props> = ({
           )}
         </PreviewPDFMobile>
 
-        {pdfUrl ? (
+        {pdfUrl && !curriculoLoading ? (
           <LinkDownload
             download={`Curriculo_${curriculoData.nome}`}
             href={pdfUrl}
@@ -135,7 +137,7 @@ const FormDownload: React.FC<Props> = ({
           <FormParagraph>{labels.Loading}...</FormParagraph>
         )}
 
-        {curriculoCanvas ? (
+        {curriculoCanvas && !curriculoLoading ? (
           <LinkDownload
             download={`Curriculo_${curriculoData.nome}`}
             href={curriculoCanvas.toDataURL()}
