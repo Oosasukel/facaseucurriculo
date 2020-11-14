@@ -13,6 +13,10 @@ export const LanguageContext = React.createContext<
   UsePersistedStateResponse<string>
 >(['pt', () => {}]);
 
+export const ModeloContext = React.createContext<
+  UsePersistedStateResponse<number>
+>([1, () => {}]);
+
 function App() {
   const [themeName, setThemeName] = usePersistedState<ThemeNames>(
     'themeName',
@@ -22,6 +26,8 @@ function App() {
     'language',
     defaultLanguage
   );
+  const [modelo, setModelo] = usePersistedState('model', 1);
+
   const [theme, setTheme] = useState<Theme>(themes[themeName]);
 
   const handleSetTheme = (selectedThemeName: ThemeNames) => {
@@ -34,8 +40,10 @@ function App() {
   return (
     <ThemeProvider theme={{ ...theme, setTheme: handleSetTheme }}>
       <LanguageContext.Provider value={[language, setLanguage]}>
-        <GlobalStyle />
-        <Routes />
+        <ModeloContext.Provider value={[modelo, setModelo]}>
+          <GlobalStyle />
+          <Routes />
+        </ModeloContext.Provider>
       </LanguageContext.Provider>
     </ThemeProvider>
   );

@@ -26,6 +26,9 @@ import {
   FormTitle,
   InputLabel,
   InputsContainer,
+  ModelosContainer,
+  ModelosItems,
+  ModeloItem,
 } from '../../styles';
 import InvisibleInput from '../../../../../components/Form/InvisibleInput';
 import PreviewPDF from '../../PreviewPDF';
@@ -33,8 +36,11 @@ import Spinner from '../../../../../components/Spinner';
 import FormButton from '../../../../../components/FormButton';
 import { FaAngleLeft, FaAngleRight, FaPlus, FaTrash } from 'react-icons/fa';
 import Slider from '../../../../../components/Form/Slider';
-import { LanguageContext } from '../../../../../App';
+import { LanguageContext, ModeloContext } from '../../../../../App';
 import { messages } from '../../../../../languages';
+
+import modelo1Image from '../../../../../assets/images/Modelo1.png';
+import modelo2Image from '../../../../../assets/images/Modelo2.png';
 
 interface Props {
   previousStep: () => void;
@@ -51,6 +57,7 @@ const FormHabilidade: React.FC<Props> = ({
   setCurriculoData,
   curriculoCanvas,
 }) => {
+  const [modelo, setModelo] = useContext(ModeloContext);
   const formRef = useRef<FormHandles>(null);
   const [language] = useContext(LanguageContext);
   const [labels, setLabels] = useState(messages[language]);
@@ -77,6 +84,22 @@ const FormHabilidade: React.FC<Props> = ({
 
   const handleNextClick = () => {
     formRef.current?.submitForm();
+  };
+
+  const handlePreviousModel = () => {
+    if (modelo > 1) {
+      setModelo(modelo - 1);
+    } else {
+      setModelo(2);
+    }
+  };
+
+  const handleNextModel = () => {
+    if (modelo < 2) {
+      setModelo(modelo + 1);
+    } else {
+      setModelo(1);
+    }
   };
 
   const updateCurriculoData = () => {
@@ -250,6 +273,30 @@ const FormHabilidade: React.FC<Props> = ({
         ) : (
           <Spinner fontSize={16} />
         )}
+        <ModelosContainer>
+          <FormButton onClick={handlePreviousModel}>
+            <FaAngleLeft />
+          </FormButton>
+
+          <ModelosItems>
+            <ModeloItem
+              onClick={() => setModelo(1)}
+              className={modelo === 1 ? 'active' : ''}
+            >
+              <img src={modelo1Image} alt='Model' />
+            </ModeloItem>
+            <ModeloItem
+              onClick={() => setModelo(2)}
+              className={modelo === 2 ? 'active' : ''}
+            >
+              <img src={modelo2Image} alt='Model' />
+            </ModeloItem>
+          </ModelosItems>
+
+          <FormButton onClick={handleNextModel}>
+            <FaAngleRight />
+          </FormButton>
+        </ModelosContainer>
       </CurriculoContainer>
     </FormHabilidadeContainer>
   );

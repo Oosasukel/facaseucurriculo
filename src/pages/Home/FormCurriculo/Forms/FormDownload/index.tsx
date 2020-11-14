@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FaAngleLeft, FaDownload } from 'react-icons/fa';
+import { FaAngleLeft, FaAngleRight, FaDownload } from 'react-icons/fa';
 import FormButton from '../../../../../components/FormButton';
 import Spinner from '../../../../../components/Spinner';
 import { CurriculoData } from '../../model';
@@ -11,16 +11,23 @@ import {
   FormParagraph,
   FormTitle,
   InputsContainer,
+  ModeloItem,
+  ModelosContainer,
+  ModelosItems,
 } from '../../styles';
 import {
   FormDownloadContainer,
   LinkDownload,
   PreviewPDFMobile,
+  ModelosMobile,
 } from './styles';
 import FormFeedback from './FormFeedback';
 import { firestoreDB } from '../../../../../services/firestore';
-import { LanguageContext } from '../../../../../App';
+import { LanguageContext, ModeloContext } from '../../../../../App';
 import { messages } from '../../../../../languages';
+
+import modelo1Image from '../../../../../assets/images/Modelo1.png';
+import modelo2Image from '../../../../../assets/images/Modelo2.png';
 
 const customStyles = {
   content: {
@@ -53,6 +60,7 @@ const FormDownload: React.FC<Props> = ({
   curriculoCanvas,
   curriculoLoading,
 }) => {
+  const [modelo, setModelo] = useContext(ModeloContext);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [language] = useContext(LanguageContext);
   const [labels, setLabels] = useState(messages[language]);
@@ -83,6 +91,22 @@ const FormDownload: React.FC<Props> = ({
     setTimeout(() => {
       openFeedbackModal();
     }, 300);
+  };
+
+  const handlePreviousModel = () => {
+    if (modelo > 1) {
+      setModelo(modelo - 1);
+    } else {
+      setModelo(2);
+    }
+  };
+
+  const handleNextModel = () => {
+    if (modelo < 2) {
+      setModelo(modelo + 1);
+    } else {
+      setModelo(1);
+    }
   };
 
   const sendDataToStatistic = (type: string) => {
@@ -124,6 +148,33 @@ const FormDownload: React.FC<Props> = ({
           )}
         </PreviewPDFMobile>
 
+        <ModelosMobile>
+          <ModelosContainer>
+            <FormButton onClick={handlePreviousModel}>
+              <FaAngleLeft />
+            </FormButton>
+
+            <ModelosItems>
+              <ModeloItem
+                onClick={() => setModelo(1)}
+                className={modelo === 1 ? 'active' : ''}
+              >
+                <img src={modelo1Image} alt='Model' />
+              </ModeloItem>
+              <ModeloItem
+                onClick={() => setModelo(2)}
+                className={modelo === 2 ? 'active' : ''}
+              >
+                <img src={modelo2Image} alt='Model' />
+              </ModeloItem>
+            </ModelosItems>
+
+            <FormButton onClick={handleNextModel}>
+              <FaAngleRight />
+            </FormButton>
+          </ModelosContainer>
+        </ModelosMobile>
+
         {pdfUrl && !curriculoLoading ? (
           <LinkDownload
             download={`Curriculo_${curriculoData.nome}`}
@@ -164,6 +215,30 @@ const FormDownload: React.FC<Props> = ({
         ) : (
           <Spinner fontSize={16} />
         )}
+        <ModelosContainer>
+          <FormButton onClick={handlePreviousModel}>
+            <FaAngleLeft />
+          </FormButton>
+
+          <ModelosItems>
+            <ModeloItem
+              onClick={() => setModelo(1)}
+              className={modelo === 1 ? 'active' : ''}
+            >
+              <img src={modelo1Image} alt='Model' />
+            </ModeloItem>
+            <ModeloItem
+              onClick={() => setModelo(2)}
+              className={modelo === 2 ? 'active' : ''}
+            >
+              <img src={modelo2Image} alt='Model' />
+            </ModeloItem>
+          </ModelosItems>
+
+          <FormButton onClick={handleNextModel}>
+            <FaAngleRight />
+          </FormButton>
+        </ModelosContainer>
       </CurriculoContainer>
     </FormDownloadContainer>
   );

@@ -12,15 +12,18 @@ import FormDownload from './Forms/FormDownload';
 import { FormContainer } from './styles';
 import pdfToCanvas from '../../../utils/pdfToCanvas';
 import FormProgress from './FormProgress';
-import usePersistedState from '../../../utils/usePersistedState';
-import { LanguageContext } from '../../../App';
+import { LanguageContext, ModeloContext } from '../../../App';
 import { messages } from '../../../languages';
+import Curriculo2 from './Curriculos/Curriculo2';
+import usePersistedCurriculo from '../../../utils/usePersistedCurriculo';
 
 const FormCurriculo: React.FC = () => {
   const [language] = useContext(LanguageContext);
-  const [lastCurriculoData, setLastCurriculoData] = usePersistedState<
-    CurriculoData
-  >('lastCurriculoDataV3', curriculoDefaultData);
+  const [modelo] = useContext(ModeloContext);
+  const [lastCurriculoData, setLastCurriculoData] = usePersistedCurriculo(
+    'lastCurriculoDataV4',
+    curriculoDefaultData
+  );
   const [step, setStep] = useState(1);
   const [curriculoData, setCurriculoData] = useState<CurriculoData>(
     lastCurriculoData
@@ -32,23 +35,6 @@ const FormCurriculo: React.FC = () => {
     setCurriculoCanvas,
   ] = useState<HTMLCanvasElement | null>(null);
   const [labels, setLabels] = useState(messages[language]);
-
-  useEffect(() => {
-    const curriculoDataConverted = { ...lastCurriculoData };
-
-    curriculoDataConverted.empregos.forEach((emprego) => {
-      emprego.inicio = new Date(emprego.inicio);
-      emprego.fim = new Date(emprego.fim);
-    });
-
-    curriculoDataConverted.cursos.forEach((curso) => {
-      curso.inicio = new Date(curso.inicio);
-      curso.fim = new Date(curso.fim);
-    });
-
-    setCurriculoData(curriculoDataConverted);
-    // eslint-disable-next-line
-  }, []);
 
   useEffect(() => {
     if (language === 'pt') {
@@ -71,13 +57,25 @@ const FormCurriculo: React.FC = () => {
   }, [language]);
 
   useEffect(() => {
+    setCurriculoCanvas(null);
+  }, [modelo]);
+
+  useEffect(() => {
     let isMounted = true;
 
     const updatePdfBlob = async () => {
       setCurriculoLoading(true);
 
+      let ModeloEscolhido;
+
+      if (modelo === 1) {
+        ModeloEscolhido = Curriculo1;
+      } else {
+        ModeloEscolhido = Curriculo2;
+      }
+
       const blob = await ReactPDF.pdf(
-        <Curriculo1
+        <ModeloEscolhido
           labels={labels}
           language={language}
           curriculoData={curriculoData}
@@ -96,7 +94,7 @@ const FormCurriculo: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, [curriculoData, language, labels]);
+  }, [curriculoData, language, labels, modelo]);
 
   useEffect(() => {
     let isMounted = true;

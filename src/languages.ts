@@ -15,10 +15,21 @@ export interface Labels {
   NavbarHome: string;
   NavbarContact: string;
 
+  CurriculoPersonalDataTitle: string;
   CurriculoSkillsTitle: string;
   CurriculoExperiencesTitle: string;
   CurriculoEducationTitle: string;
   CurriculoCurrent: string;
+  CurriculoBirthdayTitle: string;
+  CurriculoContactTitle: string;
+  CurriculoAddressTitle: string;
+  CurriculoPersonalDescriptionTitle: string;
+  CurriculoLanguageLevels: {
+    Basic: string;
+    Intermediate: string;
+    Advanced: string;
+    Fluent: string;
+  }
 
   FormContatoTitle: string;
   FormContatoMessage1: string;
@@ -92,10 +103,21 @@ export const messages: Messages = {
     NavbarHome: 'Início',
     NavbarContact: 'Contato',
 
+    CurriculoPersonalDataTitle: 'Dados Pessoais',
     CurriculoSkillsTitle: 'Habilidades',
     CurriculoExperiencesTitle: 'Experiências',
     CurriculoEducationTitle: 'Formação',
     CurriculoCurrent: 'Atualmente',
+    CurriculoBirthdayTitle: 'Data de Nascimento',
+    CurriculoContactTitle: 'Contato',
+    CurriculoAddressTitle: 'Endereço',
+    CurriculoPersonalDescriptionTitle: 'Descrição Pessoal',
+    CurriculoLanguageLevels: {
+      Basic: 'Básico',
+      Intermediate: 'Intermediário',
+      Advanced: 'Avançado',
+      Fluent: 'Fluente',
+    },
 
     FormContatoTitle: 'Informações de contato',
     FormContatoMessage1: 'Qual a melhor maneira dos recrutadores entrarem em contato com você?',
@@ -167,10 +189,21 @@ export const messages: Messages = {
     NavbarHome: 'Home',
     NavbarContact: 'Contact',
 
+    CurriculoPersonalDataTitle: 'Personal Data',
     CurriculoSkillsTitle: 'Skills',
     CurriculoExperiencesTitle: 'Experiences',
     CurriculoEducationTitle: 'Education',
     CurriculoCurrent: 'Current',
+    CurriculoBirthdayTitle: 'Date of Birth',
+    CurriculoContactTitle: 'Contact',
+    CurriculoAddressTitle: 'Address',
+    CurriculoPersonalDescriptionTitle: 'Summary',
+    CurriculoLanguageLevels: {
+      Basic: 'Basic',
+      Intermediate: 'Intermediate',
+      Advanced: 'Advanced',
+      Fluent: 'Fluent',
+    },
 
     FormContatoTitle: 'Contact Information',
     FormContatoMessage1: 'What\'s the best way for employers to contact you?',

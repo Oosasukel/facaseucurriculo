@@ -3,6 +3,7 @@ import { Page, Text, View, Document, Image } from '@react-pdf/renderer';
 
 import styles from './styles';
 
+import birthDayIcon from '../../../../../assets/images/birthCake.png';
 import phoneIcon from '../../../../../assets/images/phone-solid.png';
 import emailIcon from '../../../../../assets/images/envelope-open-solid.png';
 import linkedinIcon from '../../../../../assets/images/linkedin-in-brands.png';
@@ -12,8 +13,9 @@ import graduationIcon from '../../../../../assets/images/graduation-cap-solid.pn
 import { CurriculoData } from '../../model';
 
 import { Labels } from '../../../../../languages';
+import { dateFormat } from '../../../../../utils/dateFormat';
 
-const months = [
+export const months = [
   'Jan',
   'Fev',
   'Mar',
@@ -28,13 +30,22 @@ const months = [
   'Dez',
 ];
 
-interface Props {
+export const languagesDateFormat: { [language: string]: string } = {
+  pt: 'dd/MM/yyyy',
+  en: 'M/d/yyyy',
+};
+
+export interface CurriculoProps {
   curriculoData: CurriculoData;
   labels: Labels;
   language: string;
 }
 
-const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
+const Curriculo1: React.FC<CurriculoProps> = ({
+  curriculoData,
+  labels,
+  language,
+}) => {
   return (
     <Document>
       <Page size='A4' style={styles.page}>
@@ -107,6 +118,17 @@ const Curriculo1: React.FC<Props> = ({ curriculoData, labels, language }) => {
                   </View>
                 </View>
               )}
+              <View style={styles.contactItem}>
+                <View style={styles.contactIconContainer}>
+                  <Image src={birthDayIcon} style={styles.contactIcon} />
+                </View>
+                <Text style={styles.contactText}>
+                  {dateFormat(
+                    curriculoData.dateBirth,
+                    languagesDateFormat[language]
+                  )}
+                </Text>
+              </View>
             </View>
 
             {(curriculoData.habilidades.length > 3 ||

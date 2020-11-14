@@ -10,6 +10,7 @@ import {
   PhotoLabel,
   ImageContainer,
   ImagePreviewContainer,
+  DateContainer,
 } from './styles';
 import PreviewPDF from '../../PreviewPDF';
 
@@ -21,11 +22,18 @@ import {
   FormTitle,
   InputsContainer,
   ButtonsContainer,
+  ModelosContainer,
+  ModeloItem,
+  ModelosItems,
 } from '../../styles';
-import { FaAngleRight } from 'react-icons/fa';
+import { FaAngleRight, FaAngleLeft } from 'react-icons/fa';
 import FormButton from '../../../../../components/FormButton';
-import { LanguageContext } from '../../../../../App';
+import { LanguageContext, ModeloContext } from '../../../../../App';
 import { messages } from '../../../../../languages';
+
+import modelo1Image from '../../../../../assets/images/Modelo1.png';
+import modelo2Image from '../../../../../assets/images/Modelo2.png';
+import FormDatePicker from '../../../../../components/Form/FormDatePicker';
 
 interface Props {
   nextStep: () => void;
@@ -40,6 +48,7 @@ const FormContato: React.FC<Props> = ({
   setCurriculoData,
   curriculoCanvas,
 }) => {
+  const [modelo, setModelo] = useContext(ModeloContext);
   const formRef = useRef<FormHandles>(null);
   const inputFotoRef = useRef<HTMLInputElement>(null);
   const [language] = useContext(LanguageContext);
@@ -63,6 +72,12 @@ const FormContato: React.FC<Props> = ({
     setCurriculoData({ ...curriculoData, ...data });
   };
 
+  const updateBirthDay = (date: Date | [Date, Date] | null) => {
+    const newBirthDay = date as Date;
+
+    setCurriculoData({ ...curriculoData, dateBirth: newBirthDay });
+  };
+
   const handleFotoChange = () => {
     const files = inputFotoRef.current?.files;
 
@@ -72,6 +87,22 @@ const FormContato: React.FC<Props> = ({
       setCurriculoData({ ...curriculoData, foto: fileUrl });
     } else {
       setCurriculoData({ ...curriculoData, foto: userImage });
+    }
+  };
+
+  const handlePreviousModel = () => {
+    if (modelo > 1) {
+      setModelo(modelo - 1);
+    } else {
+      setModelo(2);
+    }
+  };
+
+  const handleNextModel = () => {
+    if (modelo < 2) {
+      setModelo(modelo + 1);
+    } else {
+      setModelo(1);
     }
   };
 
@@ -123,6 +154,14 @@ const FormContato: React.FC<Props> = ({
             name='profissao'
             placeholder={labels.FormContatoJobTitle}
           />
+          <DateContainer>
+            <label htmlFor='dateBirth'>{labels.CurriculoBirthdayTitle}:</label>
+            <FormDatePicker
+              id='dateBirth'
+              onChange={updateBirthDay}
+              name='dateBirth'
+            />
+          </DateContainer>
           <Input
             onBlur={updateCurriculoData}
             name='cidade'
@@ -200,6 +239,30 @@ const FormContato: React.FC<Props> = ({
         ) : (
           <Spinner fontSize={16} />
         )}
+        <ModelosContainer>
+          <FormButton onClick={handlePreviousModel}>
+            <FaAngleLeft />
+          </FormButton>
+
+          <ModelosItems>
+            <ModeloItem
+              onClick={() => setModelo(1)}
+              className={modelo === 1 ? 'active' : ''}
+            >
+              <img src={modelo1Image} alt='Model' />
+            </ModeloItem>
+            <ModeloItem
+              onClick={() => setModelo(2)}
+              className={modelo === 2 ? 'active' : ''}
+            >
+              <img src={modelo2Image} alt='Model' />
+            </ModeloItem>
+          </ModelosItems>
+
+          <FormButton onClick={handleNextModel}>
+            <FaAngleRight />
+          </FormButton>
+        </ModelosContainer>
       </CurriculoContainer>
     </FormContatoContainer>
   );

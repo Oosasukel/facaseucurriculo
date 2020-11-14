@@ -52,3 +52,13 @@ export const PreviewPDFMobile = styled.div`
     align-items: center;
   }
 `;
+
+export const ModelosMobile = styled.div`
+  display: none;
+
+  @media (max-width: 740px){
+    display: flex;
+    width: 100%;
+    max-width: 350px;
+  }
+`;

@@ -15,6 +15,7 @@ export interface CurriculoData {
   telefone: string;
   email: string;
   foto: string;
+  dateBirth: Date;
 
   // Step 2 - Experiências Anteriores
   // Os recrutadores analisam seu resumo por seis segundos para decidir se você bate com a vaga.
@@ -89,6 +90,7 @@ export const curriculoDefaultData: CurriculoData = {
   bairro:  '',
   telefone: '',
   email: '',
+  dateBirth: new Date(),
   foto: userImage,
   empregos: [],
   cursos: [],

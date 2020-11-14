@@ -48,18 +48,20 @@ export const InputsContainer = styled.div`
 
 export const CurriculoContainer = styled.div`
   display: flex;
+  flex-direction: column;
   align-self: center;
   width: 50%;
   max-width: 50%;
   padding: 1rem;
 
-  @media (max-width: 740px){
+  @media (max-width: 740px) {
     display: none;
   }
 `;
 
 export const ButtonsContainer = styled.div`
   width: 100%;
+  margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -194,4 +196,44 @@ export const AtualLabel = styled.label`
   font-size: 0.8rem;
 
   transition: color 0.2s;
+`;
+
+export const ModelosContainer = styled.div`
+  display: flex;
+  width: 100%;
+  margin: 1rem 0;
+  justify-content: space-between;
+  align-items: center;
+
+  button {
+    margin: 0 0.5rem;
+  }
+`;
+
+export const ModelosItems = styled.div`
+  display: flex;
+  height: 100px;
+  width: 100%;
+  justify-content: space-around;
+`;
+
+export const ModeloItem = styled.div`
+  height: 100%;
+  cursor: pointer;
+  opacity: 0.5;
+  border-radius: 10px;
+  overflow: hidden;
+
+  img {
+    height: 100%;
+  }
+
+  &.active {
+    opacity: 1;
+    border: 2px solid var(--color-form-border);
+  }
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;

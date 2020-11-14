@@ -72,3 +72,20 @@ export const ImagePreview = styled.img`
   border-radius: 50%;
   border: 2px solid var(--color-form-input-border);
 `;
+
+export const DateContainer = styled.div`
+  display: flex;
+  align-items: center;
+
+  label {
+    font-size: 1rem;
+    color: var(--color-form-label);
+    margin-right: 1rem;
+  }
+
+  @media (max-width: 740px) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+`;
