@@ -91,6 +91,7 @@ const FormResumo: React.FC<Props> = ({
           <Textarea
             onBlur={updateCurriculoData}
             name='resumo'
+            maxLength={600}
             placeholder={labels.FormResumoResumo}
           />
         </Form>

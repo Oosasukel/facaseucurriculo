@@ -17,6 +17,15 @@ import { messages } from '../../../languages';
 import Curriculo2 from './Curriculos/Curriculo2';
 import usePersistedCurriculo from '../../../utils/usePersistedCurriculo';
 
+export const pagesContext = React.createContext<
+  [PagesContext, React.Dispatch<React.SetStateAction<PagesContext>>]
+>([{ pages: 1, currentPage: 1 }, () => {}]);
+
+interface PagesContext {
+  pages: number;
+  currentPage: number;
+}
+
 const FormCurriculo: React.FC = () => {
   const [language] = useContext(LanguageContext);
   const [modelo] = useContext(ModeloContext);
@@ -35,6 +44,10 @@ const FormCurriculo: React.FC = () => {
     setCurriculoCanvas,
   ] = useState<HTMLCanvasElement | null>(null);
   const [labels, setLabels] = useState(messages[language]);
+  const [pdfPages, setPdfPages] = useState<PagesContext>({
+    pages: 1,
+    currentPage: 1,
+  });
 
   useEffect(() => {
     if (language === 'pt') {
@@ -100,10 +113,18 @@ const FormCurriculo: React.FC = () => {
     let isMounted = true;
 
     setTimeout(() => {
-      pdfToCanvas(pdfUrl).then((canvas) => {
+      pdfToCanvas(pdfUrl, pdfPages.currentPage).then((response) => {
+        const { canvas, pages } = response;
+        let currentPage = pdfPages.currentPage;
+
+        if (pdfPages.currentPage > pages) {
+          currentPage = pages;
+        }
+
         if (canvas) {
           if (isMounted) {
             setCurriculoCanvas(canvas);
+            setPdfPages({ currentPage, pages });
           }
         }
       });
@@ -112,7 +133,7 @@ const FormCurriculo: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, [pdfUrl]);
+  }, [pdfUrl, pdfPages]);
 
   useEffect(() => {
     setLastCurriculoData({
@@ -134,63 +155,65 @@ const FormCurriculo: React.FC = () => {
   };
 
   return (
-    <FormContainer>
-      <FormProgress step={step} setStep={setStep} />
+    <pagesContext.Provider value={[pdfPages, setPdfPages]}>
+      <FormContainer>
+        <FormProgress step={step} setStep={setStep} />
 
-      {step === 1 ? (
-        <FormContato
-          nextStep={nextStep}
-          curriculoData={curriculoData}
-          setCurriculoData={setCurriculoData}
-          curriculoCanvas={curriculoCanvas}
-        ></FormContato>
-      ) : null}
-      {step === 2 ? (
-        <FormExperiencia
-          previousStep={previousStep}
-          nextStep={nextStep}
-          curriculoData={curriculoData}
-          setCurriculoData={setCurriculoData}
-          curriculoCanvas={curriculoCanvas}
-        />
-      ) : null}
-      {step === 3 ? (
-        <FormEducacao
-          previousStep={previousStep}
-          nextStep={nextStep}
-          curriculoData={curriculoData}
-          setCurriculoData={setCurriculoData}
-          curriculoCanvas={curriculoCanvas}
-        />
-      ) : null}
-      {step === 4 ? (
-        <FormHabilidade
-          previousStep={previousStep}
-          nextStep={nextStep}
-          curriculoData={curriculoData}
-          setCurriculoData={setCurriculoData}
-          curriculoCanvas={curriculoCanvas}
-        />
-      ) : null}
-      {step === 5 ? (
-        <FormResumo
-          previousStep={previousStep}
-          nextStep={nextStep}
-          curriculoData={curriculoData}
-          setCurriculoData={setCurriculoData}
-          curriculoCanvas={curriculoCanvas}
-        />
-      ) : null}
-      {step === 6 ? (
-        <FormDownload
-          previousStep={previousStep}
-          curriculoData={curriculoData}
-          curriculoLoading={curriculoLoading}
-          pdfUrl={pdfUrl}
-          curriculoCanvas={curriculoCanvas}
-        />
-      ) : null}
-    </FormContainer>
+        {step === 1 ? (
+          <FormContato
+            nextStep={nextStep}
+            curriculoData={curriculoData}
+            setCurriculoData={setCurriculoData}
+            curriculoCanvas={curriculoCanvas}
+          ></FormContato>
+        ) : null}
+        {step === 2 ? (
+          <FormExperiencia
+            previousStep={previousStep}
+            nextStep={nextStep}
+            curriculoData={curriculoData}
+            setCurriculoData={setCurriculoData}
+            curriculoCanvas={curriculoCanvas}
+          />
+        ) : null}
+        {step === 3 ? (
+          <FormEducacao
+            previousStep={previousStep}
+            nextStep={nextStep}
+            curriculoData={curriculoData}
+            setCurriculoData={setCurriculoData}
+            curriculoCanvas={curriculoCanvas}
+          />
+        ) : null}
+        {step === 4 ? (
+          <FormHabilidade
+            previousStep={previousStep}
+            nextStep={nextStep}
+            curriculoData={curriculoData}
+            setCurriculoData={setCurriculoData}
+            curriculoCanvas={curriculoCanvas}
+          />
+        ) : null}
+        {step === 5 ? (
+          <FormResumo
+            previousStep={previousStep}
+            nextStep={nextStep}
+            curriculoData={curriculoData}
+            setCurriculoData={setCurriculoData}
+            curriculoCanvas={curriculoCanvas}
+          />
+        ) : null}
+        {step === 6 ? (
+          <FormDownload
+            previousStep={previousStep}
+            curriculoData={curriculoData}
+            curriculoLoading={curriculoLoading}
+            pdfUrl={pdfUrl}
+            curriculoCanvas={curriculoCanvas}
+          />
+        ) : null}
+      </FormContainer>
+    </pagesContext.Provider>
   );
 };
 

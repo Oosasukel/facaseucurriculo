@@ -115,6 +115,7 @@ const FormDownload: React.FC<Props> = ({
       .add({
         curriculo: curriculoData,
         type,
+        modelCV: modelo,
         date: Date.now(),
       })
       .catch((error) => {
