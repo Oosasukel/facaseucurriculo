@@ -5,6 +5,7 @@ export const ProgressBarContainer = styled.div`
   position: relative;
   width: 100%;
   height: 24px;
+  margin-top: 0.5rem;
   align-items: center;
 `;
 
@@ -13,7 +14,7 @@ export const ProgressBarTotal = styled.div`
   width: 100%;
   height: 5px;
   margin: 0 0.5rem;
-  
+
   transition: background-color 0.2s;
 `;
 
@@ -42,7 +43,8 @@ export const IconContainer = styled.div`
   justify-content: center;
   height: 30px;
   width: 30px;
-  background-color: ${({selected}: IconContainerProps) => selected ? 'var(--color-primary)' : 'var(--color-form-border)'};
+  background-color: ${({ selected }: IconContainerProps) =>
+    selected ? 'var(--color-primary)' : 'var(--color-form-border)'};
   border-radius: 50%;
 
   transition: background-color 0.2s;
