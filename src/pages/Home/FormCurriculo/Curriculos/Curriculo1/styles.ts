@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   experienceItemRoleContainer: {
-    width: 100,
+    width: 110,
     marginRight: 10,
   },
   courseItemRoleContainer: {

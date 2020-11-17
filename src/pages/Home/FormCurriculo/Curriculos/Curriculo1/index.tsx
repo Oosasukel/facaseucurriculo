@@ -63,14 +63,13 @@ const Curriculo1: React.FC<CurriculoProps> = ({
             </View>
 
             <View style={styles.contactContainer}>
-              {curriculoData.telefone !== '' && (
+              {curriculoData.telefone.number !== '' && (
                 <View style={styles.contactItem}>
                   <View style={styles.contactIconContainer}>
                     <Image src={phoneIcon} style={styles.contactIcon} />
                   </View>
                   <Text style={styles.contactText}>
-                    {language !== 'pt' ? '+55 ' : ''}
-                    {curriculoData.telefone}
+                    {`+${curriculoData.telefone.code} ${curriculoData.telefone.number}`}
                   </Text>
                 </View>
               )}
@@ -239,49 +238,61 @@ const Curriculo1: React.FC<CurriculoProps> = ({
                   <View style={styles.experiencesHeaderDivider}></View>
                 </View>
 
-                {curriculoData.empregos.map((emprego) => {
-                  return (
-                    <View
-                      wrap={false}
-                      key={emprego.id}
-                      style={styles.experienceItemContainer}
-                    >
-                      <View style={styles.experienceItemRoleContainer}>
-                        <Text style={styles.experienceItemRole}>
-                          {emprego.cargo.trim()}
-                        </Text>
-                        <Text style={styles.experienceItemTime}>
-                          {`${
-                            months[new Date(emprego.inicio).getMonth()]
-                          }.${new Date(emprego.inicio).getFullYear()} - ${
-                            emprego.atualmente
-                              ? labels.CurriculoCurrent
-                              : `${
-                                  months[new Date(emprego.fim).getMonth()]
-                                }.${new Date(emprego.fim).getFullYear()}`
-                          }`}
-                        </Text>
-                      </View>
-                      <View style={styles.experienceItemCompanyContainer}>
-                        <Text style={styles.experienceItemCompanyTitle}>
-                          {emprego.empresa}
-                        </Text>
-                        {(emprego.cidade.trim() !== '' ||
-                          emprego.estado.trim() !== '') && (
-                          <Text style={styles.experienceItemCompanySummary}>
-                            {emprego.cidade.trim() !== ''
-                              ? `${emprego.cidade.trim()} - `
-                              : ''}
-                            {emprego.estado.trim()}
+                {[...curriculoData.empregos]
+                  .sort((a, b) => {
+                    if (a.atualmente) {
+                      return -1;
+                    } else if (b.atualmente) {
+                      return 1;
+                    } else if (a.fim > b.fim) {
+                      return -1;
+                    } else {
+                      return 1;
+                    }
+                  })
+                  .map((emprego) => {
+                    return (
+                      <View
+                        wrap={false}
+                        key={emprego.id}
+                        style={styles.experienceItemContainer}
+                      >
+                        <View style={styles.experienceItemRoleContainer}>
+                          <Text style={styles.experienceItemRole}>
+                            {emprego.cargo.trim()}
                           </Text>
-                        )}
-                        <Text style={styles.experienceItemCompanySummary}>
-                          {emprego.descricao}
-                        </Text>
+                          <Text style={styles.experienceItemTime}>
+                            {`${
+                              months[new Date(emprego.inicio).getMonth()]
+                            }.${new Date(emprego.inicio).getFullYear()} - ${
+                              emprego.atualmente
+                                ? labels.CurriculoCurrent
+                                : `${
+                                    months[new Date(emprego.fim).getMonth()]
+                                  }.${new Date(emprego.fim).getFullYear()}`
+                            }`}
+                          </Text>
+                        </View>
+                        <View style={styles.experienceItemCompanyContainer}>
+                          <Text style={styles.experienceItemCompanyTitle}>
+                            {emprego.empresa}
+                          </Text>
+                          {(emprego.cidade.trim() !== '' ||
+                            emprego.estado.trim() !== '') && (
+                            <Text style={styles.experienceItemCompanySummary}>
+                              {emprego.cidade.trim() !== ''
+                                ? `${emprego.cidade.trim()} - `
+                                : ''}
+                              {emprego.estado.trim()}
+                            </Text>
+                          )}
+                          <Text style={styles.experienceItemCompanySummary}>
+                            {emprego.descricao}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  );
-                })}
+                    );
+                  })}
               </View>
             )}
 
@@ -300,40 +311,52 @@ const Curriculo1: React.FC<CurriculoProps> = ({
                   <View style={styles.experiencesHeaderDivider}></View>
                 </View>
 
-                {curriculoData.cursos.map((curso) => {
-                  return (
-                    <View
-                      wrap={false}
-                      key={curso.id}
-                      style={styles.experienceItemContainer}
-                    >
-                      <View style={styles.courseItemRoleContainer}>
-                        <Text style={styles.experienceItemRole}>
-                          {curso.curso.trim()}
-                        </Text>
-                        <Text style={styles.experienceItemTime}>
-                          {`${
-                            months[new Date(curso.inicio).getMonth()]
-                          }.${new Date(curso.inicio).getFullYear()} - ${
-                            curso.atualmente
-                              ? labels.CurriculoCurrent
-                              : `${
-                                  months[new Date(curso.fim).getMonth()]
-                                }.${new Date(curso.fim).getFullYear()}`
-                          }`}
-                        </Text>
+                {[...curriculoData.cursos]
+                  .sort((a, b) => {
+                    if (a.atualmente) {
+                      return -1;
+                    } else if (b.atualmente) {
+                      return 1;
+                    } else if (a.fim > b.fim) {
+                      return -1;
+                    } else {
+                      return 1;
+                    }
+                  })
+                  .map((curso) => {
+                    return (
+                      <View
+                        wrap={false}
+                        key={curso.id}
+                        style={styles.experienceItemContainer}
+                      >
+                        <View style={styles.courseItemRoleContainer}>
+                          <Text style={styles.experienceItemRole}>
+                            {curso.curso.trim()}
+                          </Text>
+                          <Text style={styles.experienceItemTime}>
+                            {`${
+                              months[new Date(curso.inicio).getMonth()]
+                            }.${new Date(curso.inicio).getFullYear()} - ${
+                              curso.atualmente
+                                ? labels.CurriculoCurrent
+                                : `${
+                                    months[new Date(curso.fim).getMonth()]
+                                  }.${new Date(curso.fim).getFullYear()}`
+                            }`}
+                          </Text>
+                        </View>
+                        <View style={styles.experienceItemCompanyContainer}>
+                          <Text style={styles.experienceItemCompanyTitle}>
+                            {curso.escola.trim()}
+                          </Text>
+                          <Text style={styles.experienceItemCompanySummary}>
+                            {curso.cidade.trim()}
+                          </Text>
+                        </View>
                       </View>
-                      <View style={styles.experienceItemCompanyContainer}>
-                        <Text style={styles.experienceItemCompanyTitle}>
-                          {curso.escola.trim()}
-                        </Text>
-                        <Text style={styles.experienceItemCompanySummary}>
-                          {curso.cidade.trim()}
-                        </Text>
-                      </View>
-                    </View>
-                  );
-                })}
+                    );
+                  })}
               </View>
             )}
           </View>

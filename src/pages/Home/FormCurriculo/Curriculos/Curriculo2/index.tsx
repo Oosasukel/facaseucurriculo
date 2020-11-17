@@ -87,33 +87,45 @@ const Curriculo2: React.FC<CurriculoProps> = ({
                   </Text>
                   <View style={styles.softDivider} />
                   <View style={styles.escolaridadeItems}>
-                    {curriculoData.cursos.map((curso) => {
-                      return (
-                        <View
-                          key={curso.id}
-                          wrap={false}
-                          style={styles.escolaridadeItemContainer}
-                        >
-                          <Text style={styles.escolaridadeUniversidade}>
-                            {curso.cidade !== ''
-                              ? `${curso.escola.trim()} - ${curso.cidade.trim()}`
-                              : curso.escola.trim()}
-                          </Text>
-                          <Text style={styles.escolaridadeDate}>{`${
-                            months[new Date(curso.inicio).getMonth()]
-                          }.${new Date(curso.inicio).getFullYear()} - ${
-                            curso.atualmente
-                              ? labels.CurriculoCurrent
-                              : `${
-                                  months[new Date(curso.fim).getMonth()]
-                                }.${new Date(curso.fim).getFullYear()}`
-                          }`}</Text>
-                          <Text style={styles.escolaridadeCourse}>
-                            {curso.curso.trim()}
-                          </Text>
-                        </View>
-                      );
-                    })}
+                    {[...curriculoData.cursos]
+                      .sort((a, b) => {
+                        if (a.atualmente) {
+                          return -1;
+                        } else if (b.atualmente) {
+                          return 1;
+                        } else if (a.fim > b.fim) {
+                          return -1;
+                        } else {
+                          return 1;
+                        }
+                      })
+                      .map((curso) => {
+                        return (
+                          <View
+                            key={curso.id}
+                            wrap={false}
+                            style={styles.escolaridadeItemContainer}
+                          >
+                            <Text style={styles.escolaridadeUniversidade}>
+                              {curso.cidade !== ''
+                                ? `${curso.escola.trim()} - ${curso.cidade.trim()}`
+                                : curso.escola.trim()}
+                            </Text>
+                            <Text style={styles.escolaridadeDate}>{`${
+                              months[new Date(curso.inicio).getMonth()]
+                            }.${new Date(curso.inicio).getFullYear()} - ${
+                              curso.atualmente
+                                ? labels.CurriculoCurrent
+                                : `${
+                                    months[new Date(curso.fim).getMonth()]
+                                  }.${new Date(curso.fim).getFullYear()}`
+                            }`}</Text>
+                            <Text style={styles.escolaridadeCourse}>
+                              {curso.curso.trim()}
+                            </Text>
+                          </View>
+                        );
+                      })}
                   </View>
                 </>
               )}
@@ -125,45 +137,59 @@ const Curriculo2: React.FC<CurriculoProps> = ({
                   </Text>
                   <View style={styles.softDivider} />
                   <View style={styles.escolaridadeItems}>
-                    {curriculoData.empregos.map((emprego) => {
-                      return (
-                        <View
-                          key={emprego.id}
-                          wrap={false}
-                          style={styles.escolaridadeItemContainer}
-                        >
-                          <Text style={styles.escolaridadeUniversidade}>
-                            {emprego.empresa}
-                          </Text>
-                          <Text style={styles.escolaridadeDate}>
-                            {(emprego.cidade.trim() !== '' ||
-                              emprego.estado.trim() !== '') && (
-                              <Text style={styles.experienceItemCompanySummary}>
-                                {emprego.cidade.trim() !== ''
-                                  ? `${emprego.cidade.trim()} - `
-                                  : ''}
-                                {emprego.estado.trim()}
-                              </Text>
-                            )}
-                          </Text>
-                          <Text style={styles.escolaridadeDate}>{`${
-                            months[new Date(emprego.inicio).getMonth()]
-                          }.${new Date(emprego.inicio).getFullYear()} - ${
-                            emprego.atualmente
-                              ? labels.CurriculoCurrent
-                              : `${
-                                  months[new Date(emprego.fim).getMonth()]
-                                }.${new Date(emprego.fim).getFullYear()}`
-                          }`}</Text>
-                          <Text style={styles.escolaridadeCourse}>
-                            {emprego.cargo.trim()}
-                          </Text>
-                          <Text style={styles.jobDescription}>
-                            {emprego.descricao}
-                          </Text>
-                        </View>
-                      );
-                    })}
+                    {[...curriculoData.empregos]
+                      .sort((a, b) => {
+                        if (a.atualmente) {
+                          return -1;
+                        } else if (b.atualmente) {
+                          return 1;
+                        } else if (a.fim > b.fim) {
+                          return -1;
+                        } else {
+                          return 1;
+                        }
+                      })
+                      .map((emprego) => {
+                        return (
+                          <View
+                            key={emprego.id}
+                            wrap={false}
+                            style={styles.escolaridadeItemContainer}
+                          >
+                            <Text style={styles.escolaridadeUniversidade}>
+                              {emprego.empresa}
+                            </Text>
+                            <Text style={styles.escolaridadeDate}>
+                              {(emprego.cidade.trim() !== '' ||
+                                emprego.estado.trim() !== '') && (
+                                <Text
+                                  style={styles.experienceItemCompanySummary}
+                                >
+                                  {emprego.cidade.trim() !== ''
+                                    ? `${emprego.cidade.trim()} - `
+                                    : ''}
+                                  {emprego.estado.trim()}
+                                </Text>
+                              )}
+                            </Text>
+                            <Text style={styles.escolaridadeDate}>{`${
+                              months[new Date(emprego.inicio).getMonth()]
+                            }.${new Date(emprego.inicio).getFullYear()} - ${
+                              emprego.atualmente
+                                ? labels.CurriculoCurrent
+                                : `${
+                                    months[new Date(emprego.fim).getMonth()]
+                                  }.${new Date(emprego.fim).getFullYear()}`
+                            }`}</Text>
+                            <Text style={styles.escolaridadeCourse}>
+                              {emprego.cargo.trim()}
+                            </Text>
+                            <Text style={styles.jobDescription}>
+                              {emprego.descricao}
+                            </Text>
+                          </View>
+                        );
+                      })}
                   </View>
                 </>
               )}
@@ -217,7 +243,7 @@ const Curriculo2: React.FC<CurriculoProps> = ({
                   </>
                 )}
 
-                {(curriculoData.telefone !== '' ||
+                {(curriculoData.telefone.number !== '' ||
                   curriculoData.email !== '' ||
                   curriculoData.linkedin !== '') && (
                   <>
@@ -225,10 +251,9 @@ const Curriculo2: React.FC<CurriculoProps> = ({
                       <Text style={styles.personalLabel}>
                         {labels.CurriculoContactTitle.toUpperCase()}:
                       </Text>
-                      {curriculoData.telefone !== '' && (
+                      {curriculoData.telefone.number !== '' && (
                         <Text style={styles.personalText}>
-                          {language !== 'pt' ? '+55 ' : ''}
-                          {curriculoData.telefone}
+                          {`+${curriculoData.telefone.code} ${curriculoData.telefone.number}`}
                         </Text>
                       )}
                       {curriculoData.email !== '' && (

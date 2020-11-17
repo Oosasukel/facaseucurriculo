@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
+import 'intl-tel-input/build/css/intlTelInput.css';
+import intlTelInput from 'intl-tel-input';
 
 import Input from '../../../../../components/Form/Input';
 import { CurriculoData } from '../../model';
@@ -34,6 +36,9 @@ import { messages } from '../../../../../languages';
 import modelo1Image from '../../../../../assets/images/Modelo1.png';
 import modelo2Image from '../../../../../assets/images/Modelo2.png';
 import FormDatePicker from '../../../../../components/Form/FormDatePicker';
+import InputPhone from '../../../../../components/Form/InputPhone';
+
+import Teste from '../../../../../utils/utilsPhoneFormats.data';
 
 interface Props {
   nextStep: () => void;
@@ -53,12 +58,51 @@ const FormContato: React.FC<Props> = ({
   const inputFotoRef = useRef<HTMLInputElement>(null);
   const [language] = useContext(LanguageContext);
   const [labels, setLabels] = useState(messages[language]);
+  const phoneInputRef = useRef<HTMLInputElement>(null);
+  const [intlTelInputRef, setIntlTelInputRef] = useState<
+    intlTelInput.Plugin | undefined
+  >(undefined);
 
   useEffect(() => {
     setLabels(messages[language]);
   }, [language]);
 
+  useEffect(() => {
+    if (phoneInputRef.current) {
+      let initialCountry = curriculoData.telefone.country;
+
+      if (!initialCountry) {
+        initialCountry = language === 'pt' ? 'br' : 'us';
+      }
+
+      const intlTelRef = intlTelInput(phoneInputRef.current as Element, {
+        initialCountry,
+        separateDialCode: true,
+        utilsScript: Teste,
+        formatOnDisplay: true,
+      });
+      setIntlTelInputRef(intlTelRef);
+
+      phoneInputRef.current.addEventListener('countrychange', () => {
+        const value = phoneInputRef.current?.value.replace(/\D/gim, '');
+        if (value) {
+          intlTelRef.setNumber(value);
+        }
+      });
+    }
+    // eslint-disable-next-line
+  }, []);
+
+  const handleChangePhone = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value.replace(/\D/gim, '');
+    intlTelInputRef?.setNumber(value);
+  };
+
   const handleSubmit = (data: CurriculoData) => {
+    if (intlTelInputRef) {
+      data.telefone.code = intlTelInputRef.getSelectedCountryData().dialCode;
+      data.telefone.country = intlTelInputRef.getSelectedCountryData().iso2;
+    }
     setCurriculoData({ ...curriculoData, ...data });
     nextStep();
   };
@@ -68,7 +112,11 @@ const FormContato: React.FC<Props> = ({
   };
 
   const updateCurriculoData = () => {
-    const data = formRef.current?.getData();
+    const data = formRef.current?.getData() as CurriculoData;
+    if (intlTelInputRef) {
+      data.telefone.code = intlTelInputRef.getSelectedCountryData().dialCode;
+      data.telefone.country = intlTelInputRef.getSelectedCountryData().iso2;
+    }
     setCurriculoData({ ...curriculoData, ...data });
   };
 
@@ -108,28 +156,6 @@ const FormContato: React.FC<Props> = ({
 
   const handleFotoClick = () => {
     inputFotoRef.current?.click();
-  };
-
-  const formatInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    const arrayNumbers = value.split('').filter((n) => Number(n) || n === '0');
-
-    // 1
-    if (arrayNumbers.length > 0) {
-      arrayNumbers.splice(0, 0, '(');
-    }
-    // (159
-    if (arrayNumbers.length > 3) {
-      arrayNumbers.splice(3, 0, ') ');
-    }
-    // (15)99733-2
-    if (arrayNumbers.length > 9) {
-      arrayNumbers.splice(9, 0, '-');
-    }
-
-    const newValue = arrayNumbers.join('');
-
-    event.target.value = newValue;
   };
 
   return (
@@ -182,11 +208,11 @@ const FormContato: React.FC<Props> = ({
             name='bairro'
             placeholder={labels.FormContatoDistrict}
           />
-          <Input
-            onChange={formatInput}
+          <InputPhone
+            inputRef={phoneInputRef}
             onBlur={updateCurriculoData}
-            name='telefone'
-            placeholder={labels.FormContatoPhone}
+            onChange={handleChangePhone}
+            name='telefone.number'
           />
           <Input
             onBlur={updateCurriculoData}

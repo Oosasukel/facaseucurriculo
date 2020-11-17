@@ -12,7 +12,11 @@ export interface CurriculoData {
   linkedin: string;
   rua: string;
   bairro: string;
-  telefone: string;
+  telefone: {
+    number: string;
+    code: string;
+    country: string;
+  };
   email: string;
   foto: string;
   dateBirth: Date;
@@ -86,9 +90,13 @@ export const curriculoDefaultData: CurriculoData = {
   cidade: '',
   estado: '',
   linkedin: '',
-  rua:  '',
-  bairro:  '',
-  telefone: '',
+  rua: '',
+  bairro: '',
+  telefone: {
+    number: '',
+    code: '55',
+    country: 'br',
+  },
   email: '',
   dateBirth: new Date(),
   foto: userImage,
@@ -98,18 +106,18 @@ export const curriculoDefaultData: CurriculoData = {
     {
       id: '-3',
       category: 'Profissionais',
-      children: []
+      children: [],
     },
     {
       id: '-2',
       category: 'Pessoais',
-      children: []
+      children: [],
     },
     {
       id: '-1',
       category: 'Idiomas',
-      children: []
-    }
+      children: [],
+    },
   ],
   resumo: '',
 };
