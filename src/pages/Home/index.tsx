@@ -4,7 +4,7 @@ import Footer from '../../components/Footer';
 import Navbar from '../../components/Navbar';
 import { messages } from '../../languages';
 import FormCurriculo from './FormCurriculo';
-import { HomeContainer, Title, HomeContent } from './styles';
+import { HomeContainer, Title, HomeContent, FacebookComments } from './styles';
 
 const Home: React.FC = () => {
   const [language] = useContext(LanguageContext);
@@ -21,6 +21,12 @@ const Home: React.FC = () => {
         <HomeContent>
           <Title>{labels.HomeTitle}</Title>
           <FormCurriculo />
+          <FacebookComments
+            className='fb-comments'
+            data-href='https://facaseucurriculo.com'
+            data-numposts='3'
+            data-width=''
+          />
         </HomeContent>
         <Footer />
       </HomeContainer>

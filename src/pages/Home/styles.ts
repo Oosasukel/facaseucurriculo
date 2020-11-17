@@ -26,3 +26,12 @@ export const Title = styled.h1`
 
   transition: color 0.2s;
 `;
+
+export const FacebookComments = styled.div`
+  padding: 1rem;
+  margin: 1rem 0;
+  align-self: flex-start;
+  border: 0.5rem solid var(--color-form-border);
+  background: #fff;
+  border-radius: 20px;
+`;
