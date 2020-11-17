@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flex: 1,
   },
-  
+
   pageHeader: {
     height: 30,
     width: '100%',
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  
+
   pageFooter: {
     height: 30,
     width: '100%',
@@ -51,9 +51,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     width: 230,
 
-    backgroundColor: "#151515",
-    
-    alignItems: "center"
+    backgroundColor: '#151515',
+
+    alignItems: 'center',
   },
 
   photoContainer: {
@@ -65,24 +65,24 @@ const styles = StyleSheet.create({
 
     borderRadius: 80,
     borderWidth: 2,
-    borderColor: "#ddd",
+    borderColor: '#ddd',
   },
   photo: {
     height: '100%',
-    objectFit: "cover",
+    objectFit: 'cover',
     borderRadius: 80,
     borderWidth: 1,
-    borderColor: "#555",
+    borderColor: '#555',
   },
 
   contactContainer: {
-    width: "100%",
+    width: '100%',
     marginBottom: 20,
   },
   contactItem: {
     marginBottom: 10,
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   contactIconContainer: {
     height: 24,
@@ -91,46 +91,44 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     marginRight: 14,
 
-    backgroundColor: "#333"
+    backgroundColor: '#333',
   },
   contactIcon: {
-    height: 10
+    height: 10,
   },
   contactText: {
     maxWidth: 160,
     fontSize: 10,
-    color: "#ddd"
+    color: '#ddd',
   },
 
   addressContainer: {
-    flexWrap: "wrap"
+    flexWrap: 'wrap',
   },
 
   skillsContainer: {
-    width: "100%",
+    width: '100%',
   },
   skillsTitle: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 15,
   },
   skillsTitleText: {
-    color: "#eee",
+    color: '#eee',
     fontSize: 16,
   },
   skillsTitleDivider: {
     flex: 1,
     height: 2,
     marginLeft: 20,
-    backgroundColor: "#555",
+    backgroundColor: '#555',
   },
 
-  skillsCategory: {
-    
-  },
+  skillsCategory: {},
   skillsCategoryTitle: {
     fontSize: 16,
-    color: "#ddd",
+    color: '#ddd',
     marginBottom: 10,
   },
   skillsCategoryItems: {
@@ -141,60 +139,58 @@ const styles = StyleSheet.create({
   },
   skillItemText: {
     fontSize: 10,
-    color: "#ddd",
+    color: '#ddd',
     marginBottom: 4,
   },
   skillItemProgress: {
     height: 10,
-    backgroundColor: "#555",
+    backgroundColor: '#555',
   },
   skillItemProgressValue: {
     height: 10,
-    backgroundColor: "#ccc",
+    backgroundColor: '#ccc',
   },
 
-
-
-  
   sectionWhite: {
     paddingTop: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     flex: 1,
     paddingHorizontal: 20,
   },
 
   nameContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap"
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   firstName: {
     fontSize: 38,
     marginRight: 10,
 
-    color: "#666"
+    color: '#666',
   },
   lastName: {
     fontSize: 38,
+    marginRight: 10,
 
-    color: "#151515"
+    color: '#151515',
   },
   jobText: {
     fontSize: 16,
     paddingTop: 5,
-    color: "#151515"
+    color: '#151515',
   },
   summaryText: {
     fontSize: 10,
     paddingTop: 20,
-    color: "#666"
+    color: '#666',
   },
 
   experiencesContainer: {
     marginTop: 30,
   },
   experiencesHeader: {
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 10,
   },
   experiencesHeaderIconContainer: {
@@ -204,24 +200,24 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginRight: 10,
 
-    backgroundColor: "#151515"
+    backgroundColor: '#151515',
   },
   experiencesHeaderIcon: {
-    height: 18
+    height: 18,
   },
   experiencesHeaderTitle: {
     fontSize: 16,
-    color: "#151515",
+    color: '#151515',
     marginRight: 30,
   },
   experiencesHeaderDivider: {
     flex: 1,
     height: 2,
-    backgroundColor: "#151515",
+    backgroundColor: '#151515',
   },
 
   experienceItemContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 15,
   },
   experienceItemRoleContainer: {
@@ -234,28 +230,26 @@ const styles = StyleSheet.create({
   },
   experienceItemRole: {
     fontSize: 12,
-    color: "#151515",
+    color: '#151515',
     marginBottom: 2,
   },
   experienceItemTime: {
     fontSize: 10,
-    color: "#666",
+    color: '#666',
   },
   experienceItemCompanyContainer: {
     flex: 1,
   },
   experienceItemCompanyTitle: {
     fontSize: 12,
-    color: "#151515",
+    color: '#151515',
     marginBottom: 2,
   },
   experienceItemCompanySummary: {
     fontSize: 10,
-    color: "#666",
+    color: '#666',
     marginBottom: 2,
   },
-
 });
-
 
 export default styles;

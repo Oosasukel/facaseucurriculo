@@ -7,59 +7,63 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     paddingHorizontal: 40,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
 
   marginTop: {
     position: 'absolute',
     height: 40,
     width: '100%',
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
   marginBottom: {
     position: 'absolute',
     height: 40,
     width: '100%',
     bottom: 0,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
 
   headerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   nameContainer: {
-    width: '63%'
+    width: '63%',
   },
-  photoContainer: {
-  },
+  photoContainer: {},
   photo: {
-    objectFit: "cover",
+    objectFit: 'cover',
     width: 180,
     height: 180,
     borderRadius: 50,
   },
-  name: {
+  fullNameContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     paddingVertical: 15,
+  },
+  name: {
     fontSize: 42,
     color: '#222',
+    marginRight: 10,
   },
   jobTitle: {
     fontSize: 24,
     paddingHorizontal: 16,
     paddingVertical: 4,
     color: '#222',
-    backgroundColor: "#80dfff",
-    alignSelf: "flex-start",
+    backgroundColor: '#80dfff',
+    alignSelf: 'flex-start',
   },
   headerDivider: {
     width: '100%',
     marginVertical: 20,
-    backgroundColor: "#80dfff",
+    backgroundColor: '#80dfff',
     height: 2,
   },
   lanesContainer: {
-    flexDirection: "row",
+    flexDirection: 'row',
     flex: 1,
   },
   lane1: {
@@ -116,9 +120,7 @@ const styles = StyleSheet.create({
   personalInfoContainer: {
     marginBottom: 20,
   },
-  personalItem: {
-
-  },
+  personalItem: {},
   personalLabel: {
     fontSize: 12,
     marginBottom: 4,
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
   habilidadeText: {
     fontSize: 12,
     color: '#333',
-  }
+  },
 });
 
 export default styles;

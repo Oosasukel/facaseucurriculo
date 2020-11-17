@@ -30,13 +30,31 @@ const Curriculo2: React.FC<CurriculoProps> = ({
         <View style={styles.contentContainer}>
           <View style={styles.headerContainer}>
             <View style={styles.nameContainer}>
-              <Text style={styles.name}>
-                {`${curriculoData.nome
+              <View style={styles.fullNameContainer}>
+                {curriculoData.nome
                   .trim()
-                  .toUpperCase()} ${curriculoData.sobrenome
+                  .toUpperCase()
+                  .split(' ')
+                  .map((name, index) => {
+                    return (
+                      <Text key={`${index}${name}`} style={styles.name}>
+                        {name}
+                      </Text>
+                    );
+                  })}
+                {curriculoData.sobrenome
                   .trim()
-                  .toUpperCase()}`}
-              </Text>
+                  .toUpperCase()
+                  .split(' ')
+                  .map((name, index) => {
+                    return (
+                      <Text key={`${index}${name}`} style={styles.name}>
+                        {name}
+                      </Text>
+                    );
+                  })}
+              </View>
+
               {curriculoData.profissao !== '' && (
                 <Text style={styles.jobTitle}>
                   {curriculoData.profissao.trim()}

@@ -189,12 +189,28 @@ const Curriculo1: React.FC<CurriculoProps> = ({
             {(curriculoData.nome.trim() !== '' ||
               curriculoData.sobrenome.trim() !== '') && (
               <View style={styles.nameContainer}>
-                <Text style={styles.firstName}>
-                  {curriculoData.nome.trim().toUpperCase()}
-                </Text>
-                <Text style={styles.lastName}>
-                  {curriculoData.sobrenome.trim().toUpperCase()}
-                </Text>
+                {curriculoData.nome
+                  .trim()
+                  .toUpperCase()
+                  .split(' ')
+                  .map((name, index) => {
+                    return (
+                      <Text key={`${name}${index}`} style={styles.firstName}>
+                        {name}
+                      </Text>
+                    );
+                  })}
+                {curriculoData.sobrenome
+                  .trim()
+                  .toUpperCase()
+                  .split(' ')
+                  .map((name, index) => {
+                    return (
+                      <Text key={`${name}${index}`} style={styles.lastName}>
+                        {name}
+                      </Text>
+                    );
+                  })}
               </View>
             )}
 
