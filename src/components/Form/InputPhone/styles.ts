@@ -4,6 +4,10 @@ export const InputContainer = styled.div`
   display: flex;
   flex: 1;
 
+  .iti {
+    margin: 0.5rem 0;
+  }
+
   .iti__selected-flag {
     border-radius: 20px 0 0 20px;
   }
