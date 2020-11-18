@@ -74,32 +74,36 @@ const styles = StyleSheet.create({
     width: '37%',
   },
 
+  infoTitleTop: {
+    fontSize: 18,
+    color: '#222',
+  },
   infoTitle: {
     fontSize: 18,
+    marginTop: 20,
     color: '#222',
   },
   softDivider: {
     width: '100%',
     height: 1,
     backgroundColor: '#00ace6',
-    marginVertical: 8,
+    marginTop: 8,
   },
   descriptionText: {
-    marginBottom: 28,
+    marginTop: 8,
     fontSize: 12,
     color: '#333',
     textAlign: 'justify',
   },
 
-  escolaridadeItems: {
-    marginBottom: 20,
-  },
+  escolaridadeItems: {},
   escolaridadeItemContainer: {
-    marginBottom: 8,
+    marginTop: 8,
   },
   escolaridadeUniversidade: {
     fontSize: 14,
     marginBottom: 4,
+    marginTop: 8,
   },
   escolaridadeDate: {
     fontSize: 12,
@@ -113,7 +117,7 @@ const styles = StyleSheet.create({
 
   jobDescription: {
     fontSize: 12,
-    marginBottom: 8,
+    marginTop: 8,
     color: '#333',
   },
 
@@ -123,6 +127,7 @@ const styles = StyleSheet.create({
   personalItem: {},
   personalLabel: {
     fontSize: 12,
+    marginTop: 8,
     marginBottom: 4,
   },
   personalText: {
@@ -131,6 +136,7 @@ const styles = StyleSheet.create({
   },
 
   habilidadeCategory: {
+    marginTop: 8,
     marginBottom: 8,
   },
   habilidadeCategoryTitle: {

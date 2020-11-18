@@ -70,7 +70,7 @@ const Curriculo2: React.FC<CurriculoProps> = ({
             <View style={styles.lane1}>
               {curriculoData.resumo !== '' && (
                 <>
-                  <Text style={styles.infoTitle}>
+                  <Text style={styles.infoTitleTop}>
                     {labels.CurriculoPersonalDescriptionTitle.toUpperCase()}
                   </Text>
                   <View style={styles.softDivider} />
@@ -195,7 +195,7 @@ const Curriculo2: React.FC<CurriculoProps> = ({
               )}
             </View>
             <View style={styles.lane2}>
-              <Text style={styles.infoTitle}>
+              <Text style={styles.infoTitleTop}>
                 {labels.CurriculoPersonalDataTitle.trim().toUpperCase()}
               </Text>
               <View style={styles.softDivider} />
