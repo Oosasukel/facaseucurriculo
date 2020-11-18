@@ -15,7 +15,7 @@
 <br>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/67290471/95273328-2c937d00-0819-11eb-917c-e0e735ad7b27.png" alt="Web" />
+  <img src="https://media.giphy.com/media/ogWLcEfbFHBG7O7Ojd/giphy.gif" alt="Web" width="1500px"/>
 </p>
 
 <br>
@@ -41,7 +41,7 @@ Esse projeto foi desevolvido com [ReactJS](https://reactjs.org/) e [TypeScript](
 
 Clone esse repositório com o comando:
 ```
- git clone https://github.com/lucioeiras/ecommunity-web
+ git clone https://github.com/Oosasukel/facaseucurriculo.git
 ```
 
 Vá para a pasta do projeto:
