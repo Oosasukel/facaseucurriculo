@@ -191,14 +191,14 @@ const FormExperiencia: React.FC<Props> = ({
                     </CityContainer>
                     <DatesContainer>
                       <DateItemContainer>
-                        <InputLabel>Início</InputLabel>
+                        <InputLabel>{labels.FormEducacaoStart}</InputLabel>
                         <MonthPicker
                           onChange={(date) => updateDate(date, index, 'inicio')}
                           name={`empregos[${index}].inicio`}
                         />
                       </DateItemContainer>
                       <DateItemContainer>
-                        <InputLabel>Fim</InputLabel>
+                        <InputLabel>{labels.FormEducacaoEnd}</InputLabel>
                         <MonthPicker
                           onChange={(date) => updateDate(date, index, 'fim')}
                           name={`empregos[${index}].fim`}
