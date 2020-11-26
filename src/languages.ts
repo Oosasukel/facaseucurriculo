@@ -29,7 +29,7 @@ export interface Labels {
     Intermediate: string;
     Advanced: string;
     Fluent: string;
-  }
+  };
 
   FormContatoTitle: string;
   FormContatoMessage1: string;
@@ -120,8 +120,10 @@ export const messages: Messages = {
     },
 
     FormContatoTitle: 'Informações de contato',
-    FormContatoMessage1: 'Qual a melhor maneira dos recrutadores entrarem em contato com você?',
-    FormContatoMessage2: 'Não é necessário preencher todos os campos, mas sugerimos você preencher seu email e telefone.',
+    FormContatoMessage1:
+      'Qual a melhor maneira dos recrutadores entrarem em contato com você?',
+    FormContatoMessage2:
+      'Não é necessário preencher todos os campos, mas sugerimos você preencher seu email e telefone.',
     FormContatoFirstName: 'Nome',
     FormContatoLastName: 'Sobrenome',
     FormContatoJobTitle: 'Profissão',
@@ -141,17 +143,20 @@ export const messages: Messages = {
     FormFeedbackMessage: 'Mensagem...',
 
     FormEducacaoTitle: 'Educação',
-    FormEducacaoMessage: 'Inclua todos os cursos, mesmo que ainda esteja fazendo.',
+    FormEducacaoMessage:
+      'Inclua todos os cursos, mesmo que ainda esteja fazendo.',
     FormEducacaoCurso: 'Curso',
-    FormEducacaoEscola: 'Escola',
+    FormEducacaoEscola: 'Instituição',
     FormEducacaoCidade: 'Cidade',
     FormEducacaoAtualmente: 'Atualmente',
     FormEducacaoStart: 'Início',
     FormEducacaoEnd: 'Fim',
 
     FormExperienciaTitle: 'Experiências Anteriores',
-    FormExperienciaMessage1: 'Os recrutadores analisam seu resumo por seis segundos para decidir se você bate com a vaga.',
-    FormExperienciaMessage2: 'Sugerimos você colocar os pontos principais para dar uma boa impressão.',
+    FormExperienciaMessage1:
+      'Os recrutadores analisam seu resumo por seis segundos para decidir se você bate com a vaga.',
+    FormExperienciaMessage2:
+      'Sugerimos você colocar os pontos principais para dar uma boa impressão.',
     FormExperienciaEmpresa: 'Empresa',
     FormExperienciaCargo: 'Cargo',
     FormExperienciaCidade: 'Cidade',
@@ -160,14 +165,17 @@ export const messages: Messages = {
     FormExperienciaDescricao: 'Descricao',
 
     FormHabilidadeTitle: 'Habilidades',
-    FormHabilidadeMessage1: 'Recrutadores analisam as habilidades por palavras-chave.',
-    FormHabilidadeMessage2: 'Exemplos: MS-Office, Soluções de problemas, Organização.',
+    FormHabilidadeMessage1:
+      'Recrutadores analisam as habilidades por palavras-chave.',
+    FormHabilidadeMessage2:
+      'Exemplos: MS-Office, Soluções de problemas, Organização.',
     FormHabilidadeHabilidade: 'Habilidade',
     FormHabilidadeNivel: 'Nível',
 
     FormResumoTitle: 'Descrição',
     FormResumoMessage1: 'Um breve resumo sobre você.',
-    FormResumoMessage2: 'O resumo mostra aos empregadores que você está preparado para o trabalho.',
+    FormResumoMessage2:
+      'O resumo mostra aos empregadores que você está preparado para o trabalho.',
     FormResumoResumo: 'Uma breve descrição...',
 
     Loading: 'Carregando',
@@ -206,8 +214,9 @@ export const messages: Messages = {
     },
 
     FormContatoTitle: 'Contact Information',
-    FormContatoMessage1: 'What\'s the best way for employers to contact you?',
-    FormContatoMessage2: 'It is not necessary to complete all fields, but we suggest you to include an email and phone number.',
+    FormContatoMessage1: "What's the best way for employers to contact you?",
+    FormContatoMessage2:
+      'It is not necessary to complete all fields, but we suggest you to include an email and phone number.',
     FormContatoFirstName: 'Name',
     FormContatoLastName: 'Last Name',
     FormContatoJobTitle: 'Profession',
@@ -227,17 +236,20 @@ export const messages: Messages = {
     FormFeedbackMessage: 'Message...',
 
     FormEducacaoTitle: 'Education',
-    FormEducacaoMessage: 'Include every education, even if you\'re still there or didn\'t graduate.',
+    FormEducacaoMessage:
+      "Include every education, even if you're still there or didn't graduate.",
     FormEducacaoCurso: 'Course',
-    FormEducacaoEscola: 'School',
+    FormEducacaoEscola: 'Institution',
     FormEducacaoCidade: 'City',
     FormEducacaoAtualmente: 'Current',
     FormEducacaoStart: 'Start',
     FormEducacaoEnd: 'End',
 
     FormExperienciaTitle: 'Work History',
-    FormExperienciaMessage1: 'Employers scan your resume for six seconds to decide if you match.',
-    FormExperienciaMessage2: 'We suggest you to put the main ones, to make a good impression.',
+    FormExperienciaMessage1:
+      'Employers scan your resume for six seconds to decide if you match.',
+    FormExperienciaMessage2:
+      'We suggest you to put the main ones, to make a good impression.',
     FormExperienciaEmpresa: 'Company',
     FormExperienciaCargo: 'Job Title',
     FormExperienciaCidade: 'City',
@@ -247,13 +259,15 @@ export const messages: Messages = {
 
     FormHabilidadeTitle: 'Skills',
     FormHabilidadeMessage1: 'Employers scan skills for relevant keywords.',
-    FormHabilidadeMessage2: 'Examples: MS-Office, Troubleshooting, Organization.',
+    FormHabilidadeMessage2:
+      'Examples: MS-Office, Troubleshooting, Organization.',
     FormHabilidadeHabilidade: 'Skill',
     FormHabilidadeNivel: 'Level',
 
     FormResumoTitle: 'Summary',
     FormResumoMessage1: 'A brief summary of you.',
-    FormResumoMessage2: 'Your summary shows employers you\'re right for their job.',
+    FormResumoMessage2:
+      "Your summary shows employers you're right for their job.",
     FormResumoResumo: 'A brief summary...',
 
     Loading: 'Loading',
@@ -266,5 +280,5 @@ export const messages: Messages = {
 
     PortugueseLabel: 'Portuguese',
     EnglishLabel: 'English',
-  }
-}
+  },
+};
