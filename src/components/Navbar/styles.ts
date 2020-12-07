@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import sunImage from '../../assets/images/sun.svg';
 import moonImage from '../../assets/images/moon.svg';
 
-export const NavbarContainer = styled.div`
-`;
+export const NavbarContainer = styled.div``;
 
 export const NavbarContent = styled.div`
   background-color: var(--color-background);
@@ -58,7 +57,6 @@ export const LogoContainer = styled.span`
       color: var(--color-primary-hover);
     }
   }
-
 `;
 
 export const SpaceButtons = styled.div`
@@ -93,7 +91,7 @@ export const SpaceButtons = styled.div`
     display: none;
   }
 
-  @media (max-width: 550px){
+  @media (max-width: 550px) {
     svg {
       display: inline;
     }
@@ -146,6 +144,7 @@ export const CurrentLanguageContainer = styled.div`
 `;
 
 export const LanguageIcon = styled.img`
+  width: 32px;
   margin-right: 0.2rem;
 `;
 

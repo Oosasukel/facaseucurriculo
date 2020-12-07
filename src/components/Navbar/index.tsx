@@ -23,6 +23,9 @@ import {
 import { LanguageContext } from '../../App';
 import { messages } from '../../languages';
 
+import brazilFlag from '../../assets/images/Brazil-Flag.png';
+import englishFlag from '../../assets/images/English-Language-Flag.png';
+
 // interface MenuButton {
 //   name: string;
 //   linkTo: string;
@@ -38,11 +41,11 @@ interface LanguagesInfo {
 
 const languagesInfo: LanguagesInfo = {
   pt: {
-    image: 'https://www.countryflags.io/br/shiny/24.png',
+    image: brazilFlag,
     label: 'PortugueseLabel',
   },
   en: {
-    image: 'https://www.countryflags.io/us/shiny/24.png',
+    image: englishFlag,
     label: 'EnglishLabel',
   },
 };
