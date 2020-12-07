@@ -23,7 +23,7 @@
 <h2 id="techs">😁 Sobre </h2>
 
 O faça seu currículo é um gerador de CV's criado para facilitar aqueles com dificuldade para criar um bom currículo.  
-Você pode conferir o site [aqui](https://facaoseucurriculo.com).
+Você pode conferir o site [aqui](https://facaseucurriculo.com/).
 
 <br>
 
