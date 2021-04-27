@@ -1,4 +1,5 @@
 import { StyleSheet } from '@react-pdf/renderer';
+import { borderRadius } from 'polished';
 
 const styles = StyleSheet.create({
   page: {
@@ -69,6 +70,23 @@ const styles = StyleSheet.create({
   lane1: {
     width: '63%',
     paddingRight: 20,
+  },
+  linkedinContact : {
+    display: 'flex',
+    flexDirection: 'row',
+    marginTop: 5,
+    alignItems: 'flex-end'
+  },
+  linkedinIconContainer : {
+    height: 18,
+    width: 19,
+    borderRadius: 2,
+    padding: 3,
+    marginRight: 5,
+    backgroundColor: '#333'
+  },
+  linkedinIcon : {
+    height: 13,
   },
   lane2: {
     width: '37%',
