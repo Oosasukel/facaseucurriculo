@@ -3,6 +3,8 @@ import { Page, Text, View, Document, Image } from '@react-pdf/renderer';
 
 import styles from './styles';
 
+import linkedinIcon from '../../../../../assets/images/linkedin-in-brands.png';
+
 import { CurriculoProps, languagesDateFormat, months } from '../Curriculo1';
 import { dateFormat } from '../../../../../utils/dateFormat';
 
@@ -262,9 +264,14 @@ const Curriculo2: React.FC<CurriculoProps> = ({
                         </Text>
                       )}
                       {curriculoData.linkedin !== '' && (
-                        <Text style={styles.personalText}>
-                          {curriculoData.linkedin.trim()}
-                        </Text>
+                        <View style={styles.linkedinContact}>
+                            <View style={styles.linkedinIconContainer}>
+                                <Image src={linkedinIcon} style={styles.linkedinIcon} />
+                            </View>
+                            <Text style={styles.personalText}>
+                            {curriculoData.linkedin.replace('https://www.linkedin.com/in', '')}
+                            </Text>
+                        </View>
                       )}
                     </View>
                     <View style={styles.softDivider} />
