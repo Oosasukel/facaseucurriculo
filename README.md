@@ -1,3 +1,5 @@
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/Oosasukel/facaseucurriculo)
+
 <p align="center">
   <img src="https://user-images.githubusercontent.com/67290471/99559488-9b7cfd80-29a3-11eb-9a30-65de85471500.png" alt="Faça seu currículo" heigth="10%" width="10%" />
 </p>
