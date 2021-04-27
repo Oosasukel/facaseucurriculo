@@ -89,7 +89,7 @@ const Curriculo1: React.FC<CurriculoProps> = ({
                     <Image src={linkedinIcon} style={styles.contactIcon} />
                   </View>
                   <Text style={styles.contactText}>
-                    {curriculoData.linkedin.trim()}
+                    {curriculoData.linkedin.replace('https://www.linkedin.com/in', '')}
                   </Text>
                 </View>
               )}
@@ -330,6 +330,14 @@ const Curriculo1: React.FC<CurriculoProps> = ({
                         key={curso.id}
                         style={styles.experienceItemContainer}
                       >
+                        <View style={styles.experienceItemCompanyContainer}>
+                          <Text style={styles.experienceItemCompanyTitle}>
+                            {curso.escola.trim()}
+                          </Text>
+                          <Text style={styles.experienceItemCompanySummary}>
+                            {curso.cidade.trim()}
+                          </Text>
+                        </View>
                         <View style={styles.courseItemRoleContainer}>
                           <Text style={styles.experienceItemRole}>
                             {curso.curso.trim()}
@@ -344,14 +352,6 @@ const Curriculo1: React.FC<CurriculoProps> = ({
                                     months[new Date(curso.fim).getMonth()]
                                   }.${new Date(curso.fim).getFullYear()}`
                             }`}
-                          </Text>
-                        </View>
-                        <View style={styles.experienceItemCompanyContainer}>
-                          <Text style={styles.experienceItemCompanyTitle}>
-                            {curso.escola.trim()}
-                          </Text>
-                          <Text style={styles.experienceItemCompanySummary}>
-                            {curso.cidade.trim()}
                           </Text>
                         </View>
                       </View>
