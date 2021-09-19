@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import Switch from 'react-switch';
 import { ThemeContext } from 'styled-components';
 import { shade } from 'polished';
@@ -62,18 +62,24 @@ const Navbar: React.FC = () => {
 
   const location = useLocation();
 
-  const handleSwitchChange = (checked: boolean) => {
-    if (checked) {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-  };
+  const handleSwitchChange = useCallback(
+    (checked: boolean) => {
+      if (checked) {
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+    },
+    [setTheme]
+  );
 
-  const handleSetLanguage = (newLanguage: string) => {
-    setLanguage(newLanguage);
-    setOpenLanguages(false);
-  };
+  const handleSetLanguage = useCallback(
+    (newLanguage: string) => {
+      setLanguage(newLanguage);
+      setOpenLanguages(false);
+    },
+    [setLanguage]
+  );
 
   return (
     <NavbarContainer>

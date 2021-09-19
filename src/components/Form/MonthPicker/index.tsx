@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useField } from '@unform/core';
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker';
 
@@ -25,12 +25,15 @@ const MonthPicker: React.FC<InputProps> = ({ name, onChange, ...rest }) => {
     });
   }, [fieldName, registerField]);
 
-  const handleChange = (date: Date | [Date, Date] | null) => {
-    if (date) {
-      setSelectedDate(date);
-      onChange(date, undefined);
-    }
-  };
+  const handleChange = useCallback(
+    (date: Date | [Date, Date] | null) => {
+      if (date) {
+        setSelectedDate(date);
+        onChange(date, undefined);
+      }
+    },
+    [onChange]
+  );
 
   return (
     <InputContainer>

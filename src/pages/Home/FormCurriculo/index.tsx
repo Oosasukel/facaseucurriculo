@@ -1,5 +1,5 @@
 import ReactPDF from '@react-pdf/renderer';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import FormContato from './Forms/FormContato';
 import FormEducacao from './Forms/FormEducacao';
@@ -34,15 +34,12 @@ const FormCurriculo: React.FC = () => {
     curriculoDefaultData
   );
   const [step, setStep] = useState(1);
-  const [curriculoData, setCurriculoData] = useState<CurriculoData>(
-    lastCurriculoData
-  );
+  const [curriculoData, setCurriculoData] =
+    useState<CurriculoData>(lastCurriculoData);
   const [pdfUrl, setPdfUrl] = useState<string>('');
   const [curriculoLoading, setCurriculoLoading] = useState<boolean>(false);
-  const [
-    curriculoCanvas,
-    setCurriculoCanvas,
-  ] = useState<HTMLCanvasElement | null>(null);
+  const [curriculoCanvas, setCurriculoCanvas] =
+    useState<HTMLCanvasElement | null>(null);
   const [labels, setLabels] = useState(messages[language]);
   const [pdfPages, setPdfPages] = useState<PagesContext>({
     pages: 1,
@@ -133,7 +130,7 @@ const FormCurriculo: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, [pdfUrl, pdfPages]);
+  }, [pdfUrl, pdfPages.currentPage]);
 
   useEffect(() => {
     setLastCurriculoData({
@@ -143,16 +140,16 @@ const FormCurriculo: React.FC = () => {
     // eslint-disable-next-line
   }, [step]);
 
-  const previousStep = () => {
+  const previousStep = useCallback(() => {
     setStep(step - 1);
-  };
+  }, [step]);
 
-  const nextStep = () => {
+  const nextStep = useCallback(() => {
     const newStep = step + 1;
     if (newStep <= 6) {
       setStep(newStep);
     }
-  };
+  }, [step]);
 
   return (
     <pagesContext.Provider value={[pdfPages, setPdfPages]}>
