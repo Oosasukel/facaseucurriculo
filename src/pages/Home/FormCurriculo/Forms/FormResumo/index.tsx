@@ -29,7 +29,7 @@ interface Props {
   previousStep: () => void;
   nextStep: () => void;
   curriculoData: CurriculoData;
-  setCurriculoData: React.Dispatch<React.SetStateAction<CurriculoData>>;
+  setCurriculoData: (data: CurriculoData) => void;
   curriculoCanvas: HTMLCanvasElement | null;
 }
 

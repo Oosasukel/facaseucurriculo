@@ -109,36 +109,26 @@ const FormCurriculo: React.FC = () => {
   useEffect(() => {
     let isMounted = true;
 
-    setTimeout(() => {
-      pdfToCanvas(pdfUrl, pdfPages.currentPage).then((response) => {
-        const { canvas, pages } = response;
-        let currentPage = pdfPages.currentPage;
+    pdfToCanvas(pdfUrl, pdfPages.currentPage).then((response) => {
+      const { canvas, pages } = response;
+      let currentPage = pdfPages.currentPage;
 
-        if (pdfPages.currentPage > pages) {
-          currentPage = pages;
-        }
+      if (pdfPages.currentPage > pages) {
+        currentPage = pages;
+      }
 
-        if (canvas) {
-          if (isMounted) {
-            setCurriculoCanvas(canvas);
-            setPdfPages({ currentPage, pages });
-          }
+      if (canvas) {
+        if (isMounted) {
+          setCurriculoCanvas(canvas);
+          setPdfPages({ currentPage, pages });
         }
-      });
-    }, 200);
+      }
+    });
 
     return () => {
       isMounted = false;
     };
   }, [pdfUrl, pdfPages.currentPage]);
-
-  useEffect(() => {
-    setLastCurriculoData({
-      ...curriculoData,
-      foto: curriculoDefaultData.foto,
-    });
-    // eslint-disable-next-line
-  }, [step]);
 
   const previousStep = useCallback(() => {
     setStep(step - 1);
@@ -151,6 +141,14 @@ const FormCurriculo: React.FC = () => {
     }
   }, [step]);
 
+  const updateCurriculoData = useCallback(
+    (data: CurriculoData) => {
+      setCurriculoData(data);
+      setLastCurriculoData(data);
+    },
+    [setLastCurriculoData]
+  );
+
   return (
     <pagesContext.Provider value={[pdfPages, setPdfPages]}>
       <FormContainer>
@@ -160,7 +158,7 @@ const FormCurriculo: React.FC = () => {
           <FormContato
             nextStep={nextStep}
             curriculoData={curriculoData}
-            setCurriculoData={setCurriculoData}
+            setCurriculoData={updateCurriculoData}
             curriculoCanvas={curriculoCanvas}
           ></FormContato>
         ) : null}
@@ -169,7 +167,7 @@ const FormCurriculo: React.FC = () => {
             previousStep={previousStep}
             nextStep={nextStep}
             curriculoData={curriculoData}
-            setCurriculoData={setCurriculoData}
+            setCurriculoData={updateCurriculoData}
             curriculoCanvas={curriculoCanvas}
           />
         ) : null}
@@ -178,7 +176,7 @@ const FormCurriculo: React.FC = () => {
             previousStep={previousStep}
             nextStep={nextStep}
             curriculoData={curriculoData}
-            setCurriculoData={setCurriculoData}
+            setCurriculoData={updateCurriculoData}
             curriculoCanvas={curriculoCanvas}
           />
         ) : null}
@@ -187,7 +185,7 @@ const FormCurriculo: React.FC = () => {
             previousStep={previousStep}
             nextStep={nextStep}
             curriculoData={curriculoData}
-            setCurriculoData={setCurriculoData}
+            setCurriculoData={updateCurriculoData}
             curriculoCanvas={curriculoCanvas}
           />
         ) : null}
@@ -196,7 +194,7 @@ const FormCurriculo: React.FC = () => {
             previousStep={previousStep}
             nextStep={nextStep}
             curriculoData={curriculoData}
-            setCurriculoData={setCurriculoData}
+            setCurriculoData={updateCurriculoData}
             curriculoCanvas={curriculoCanvas}
           />
         ) : null}
