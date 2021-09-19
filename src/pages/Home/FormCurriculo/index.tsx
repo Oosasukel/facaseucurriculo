@@ -66,45 +66,39 @@ const FormCurriculo: React.FC = () => {
     // eslint-disable-next-line
   }, [language]);
 
+  const updatePdfBlob = useCallback(async () => {
+    setCurriculoLoading(true);
+
+    let ModeloEscolhido;
+
+    if (modelo === 1) {
+      ModeloEscolhido = Curriculo1;
+    } else {
+      ModeloEscolhido = Curriculo2;
+    }
+
+    const blob = await ReactPDF.pdf(
+      <ModeloEscolhido
+        labels={labels}
+        language={language}
+        curriculoData={curriculoData}
+      />
+    ).toBlob();
+    const url = URL.createObjectURL(blob);
+
+    setPdfUrl(url);
+    setCurriculoLoading(false);
+  }, [curriculoData, labels, language, modelo]);
+
   useEffect(() => {
     setCurriculoCanvas(null);
+    updatePdfBlob();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [modelo]);
 
   useEffect(() => {
-    let isMounted = true;
-
-    const updatePdfBlob = async () => {
-      setCurriculoLoading(true);
-
-      let ModeloEscolhido;
-
-      if (modelo === 1) {
-        ModeloEscolhido = Curriculo1;
-      } else {
-        ModeloEscolhido = Curriculo2;
-      }
-
-      const blob = await ReactPDF.pdf(
-        <ModeloEscolhido
-          labels={labels}
-          language={language}
-          curriculoData={curriculoData}
-        />
-      ).toBlob();
-      const url = URL.createObjectURL(blob);
-
-      if (isMounted) {
-        setPdfUrl(url);
-        setCurriculoLoading(false);
-      }
-    };
-
     updatePdfBlob();
-
-    return () => {
-      isMounted = false;
-    };
-  }, [curriculoData, language, labels, modelo]);
+  }, [updatePdfBlob]);
 
   useEffect(() => {
     let isMounted = true;
