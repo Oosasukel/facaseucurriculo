@@ -24,15 +24,21 @@ export default createGlobalStyle`
     --color-form-border: ${(props) => props.theme.colors.formBorder};
     --color-form-label: ${(props) => props.theme.colors.formLabel};
 
-    --color-form-input-background: ${(props) => props.theme.colors.formInputBackground};
+    --color-form-input-background: ${(props) =>
+      props.theme.colors.formInputBackground};
     --color-form-input-border: ${(props) => props.theme.colors.formInputBorder};
-    --color-form-input-border-hover: ${(props) => props.theme.colors.formInputBorderHover};
-    --color-form-input-border-focus: ${(props) => props.theme.colors.formInputBorderFocus};
+    --color-form-input-border-hover: ${(props) =>
+      props.theme.colors.formInputBorderHover};
+    --color-form-input-border-focus: ${(props) =>
+      props.theme.colors.formInputBorderFocus};
     --color-form-input-color: ${(props) => props.theme.colors.formInputColor};
     
-    --color-form-button-background: ${(props) => props.theme.colors.formButtonBackground};
-    --color-form-button-background-hover: ${(props) => props.theme.colors.formButtonBackgroundHover};
-    --color-form-button-border: ${(props) => props.theme.colors.formButtonBorder};
+    --color-form-button-background: ${(props) =>
+      props.theme.colors.formButtonBackground};
+    --color-form-button-background-hover: ${(props) =>
+      props.theme.colors.formButtonBackgroundHover};
+    --color-form-button-border: ${(props) =>
+      props.theme.colors.formButtonBorder};
     --color-form-button-color: ${(props) => props.theme.colors.formButtonColor};
   
     --color-loading: ${(props) => props.theme.colors.loading};
@@ -41,6 +47,8 @@ export default createGlobalStyle`
     --color-button-add: ${(props) => props.theme.colors.buttonAdd};
   
     --color-progress-icon: ${(props) => props.theme.colors.progressIcon};
+
+    --max-width: 85rem;
   }
 
   * {
@@ -59,12 +67,14 @@ export default createGlobalStyle`
   html,
   body,
   #root {
-    height: 100vh;
+    min-height: 100vh;
   }
 
   #root {
     display: grid;
     grid-template-rows: min-content 1fr;
     font-size: 16px;
+    
+    background-color: var(--color-background);
   }
 `;

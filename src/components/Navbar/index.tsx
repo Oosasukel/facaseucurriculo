@@ -26,12 +26,6 @@ import { messages } from '../../languages';
 import brazilFlag from '../../assets/images/Brazil-Flag.png';
 import englishFlag from '../../assets/images/English-Language-Flag.png';
 
-// interface MenuButton {
-//   name: string;
-//   linkTo: string;
-//   key: number;
-// }
-
 interface LanguagesInfo {
   [language: string]: {
     image: string;

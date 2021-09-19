@@ -3,10 +3,7 @@ import styled from 'styled-components';
 export const ContactContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr min-content;
-  background-color: var(--color-background);
   padding: 0 2rem;
-  
-  transition: background 0.2s;
 `;
 
 export const ContentContainer = styled.div`
@@ -35,7 +32,7 @@ export const AuthorContainer = styled.div`
   justify-content: center;
   margin: 1rem 0;
 
-  @media (max-width: 680px){
+  @media (max-width: 680px) {
     flex-direction: column;
     align-items: center;
   }
@@ -50,7 +47,7 @@ export const AuthorImage = styled.img`
 
   transition: border 0.2s;
 
-  @media (max-width: 680px){
+  @media (max-width: 680px) {
     margin: 0;
     margin-bottom: 1rem;
   }

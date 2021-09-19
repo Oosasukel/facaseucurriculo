@@ -3,10 +3,11 @@ import styled from 'styled-components';
 export const HomeContainer = styled.div`
   display: grid;
   grid-template-rows: 1fr min-content;
-  background-color: var(--color-background);
   padding: 0 2rem;
 
-  transition: background 0.2s;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
 `;
 
 export const HomeContent = styled.div`

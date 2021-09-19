@@ -12,7 +12,9 @@ export const NavbarContent = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  transition: background 0.2s;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
 
   .title {
     font-size: 2rem;
