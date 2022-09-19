@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const FooterContainer = styled.div`
   width: 100%;
@@ -13,17 +13,6 @@ export const FooterContent = styled.div`
 
   a {
     text-decoration: none;
-  }
-`;
-
-export const DonateLink = styled.a`
-  display: flex;
-  color: var(--color-form-p);
-
-  transition: color 0.2s;
-
-  &:hover {
-    color: var(--color-primary);
   }
 `;
 

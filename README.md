@@ -23,7 +23,7 @@
 <h2 id="techs">😁 Sobre </h2>
 
 O faça seu currículo é um gerador de CV's criado para facilitar aqueles com dificuldade para criar um bom currículo.  
-Você pode conferir o site [aqui](https://facaseucurriculo.com/).
+Você pode conferir o site [aqui](https://facaseucurriculo-79fc3.web.app/).
 
 <br>
 
@@ -40,30 +40,34 @@ Esse projeto foi desevolvido com [ReactJS](https://reactjs.org/) e [TypeScript](
 <h2 id="use">📢 Como contribuir </h2>
 
 Clone esse repositório com o comando:
+
 ```
  git clone https://github.com/Oosasukel/facaseucurriculo.git
 ```
 
 Vá para a pasta do projeto:
+
 ```
  cd facaseucurriculo
 ```
 
 Instale todos as depêndencias:
+
 ```
  npm install || yarn install
 ```
 
 Inicie o servidor de desenvolvimento:
+
 ```
  npm start || yarn start
 ```
 
 😀 Agora você já pode fazer suas alterações!
-  
+
  <br> 
   
 <h1> </h1>
 
-👋 Made by Rodrigo Gonçalves. 
+👋 Made by Rodrigo Gonçalves.
 [Get in touch!](https://www.linkedin.com/in/rodrigogon/)
